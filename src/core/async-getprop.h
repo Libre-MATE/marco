@@ -35,30 +35,23 @@
 
 typedef struct _AgGetPropertyTask AgGetPropertyTask;
 
-AgGetPropertyTask* ag_task_create             (Display            *display,
-                                               Window              window,
-                                               Atom                property,
-                                               long                offset,
-                                               long                length,
-                                               Bool                delete,
-                                               Atom                req_type);
-Status             ag_task_get_reply_and_free (AgGetPropertyTask  *task,
-                                               Atom               *actual_type,
-                                               int                *actual_format,
-                                               unsigned long      *nitems,
-                                               unsigned long      *bytesafter,
-                                               unsigned char     **prop);
+AgGetPropertyTask *ag_task_create(Display *display, Window window,
+                                  Atom property, long offset, long length,
+                                  Bool delete, Atom req_type);
+Status ag_task_get_reply_and_free(AgGetPropertyTask *task, Atom *actual_type,
+                                  int *actual_format, unsigned long *nitems,
+                                  unsigned long *bytesafter,
+                                  unsigned char **prop);
 
-Bool     ag_task_have_reply   (AgGetPropertyTask *task);
-Atom     ag_task_get_property (AgGetPropertyTask *task);
-Window   ag_task_get_window   (AgGetPropertyTask *task);
-Display* ag_task_get_display  (AgGetPropertyTask *task);
+Bool ag_task_have_reply(AgGetPropertyTask *task);
+Atom ag_task_get_property(AgGetPropertyTask *task);
+Window ag_task_get_window(AgGetPropertyTask *task);
+Display *ag_task_get_display(AgGetPropertyTask *task);
 
-AgGetPropertyTask* ag_get_next_completed_task (Display *display);
+AgGetPropertyTask *ag_get_next_completed_task(Display *display);
 
 /* so other headers don't have to include internal Xlib goo */
-void*    ag_Xmalloc  (unsigned long bytes);
-void*    ag_Xmalloc0 (unsigned long bytes);
+void *ag_Xmalloc(unsigned long bytes);
+void *ag_Xmalloc0(unsigned long bytes);
 
 #endif
-

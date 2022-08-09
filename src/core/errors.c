@@ -22,31 +22,33 @@
  * 02110-1301, USA.
  */
 
+#ifdef HAVE_CONFIG_H
 #include <config.h>
+#endif
+
 #include "errors.h"
-#include "display-private.h"
+
 #include <errno.h>
-#include <stdlib.h>
 #include <gdk/gdk.h>
 #include <gdk/gdkx.h>
 #include <gtk/gtk.h>
+#include <stdlib.h>
 
-void
-meta_error_trap_push (MetaDisplay *display)
-{
-  gdk_x11_display_error_trap_push (gdk_x11_lookup_xdisplay (meta_display_get_xdisplay (display)));
+#include "display-private.h"
+
+void meta_error_trap_push(MetaDisplay *display) {
+  gdk_x11_display_error_trap_push(
+      gdk_x11_lookup_xdisplay(meta_display_get_xdisplay(display)));
 }
 
-void
-meta_error_trap_pop (MetaDisplay *display,
-                     gboolean     last_request_was_roundtrip)
-{
-  gdk_x11_display_error_trap_pop_ignored (gdk_x11_lookup_xdisplay (meta_display_get_xdisplay (display)));
+void meta_error_trap_pop(MetaDisplay *display,
+                         gboolean last_request_was_roundtrip) {
+  gdk_x11_display_error_trap_pop_ignored(
+      gdk_x11_lookup_xdisplay(meta_display_get_xdisplay(display)));
 }
 
-int
-meta_error_trap_pop_with_return  (MetaDisplay *display,
-                                  gboolean     last_request_was_roundtrip)
-{
-  return gdk_x11_display_error_trap_pop (gdk_x11_lookup_xdisplay (meta_display_get_xdisplay (display)));
+int meta_error_trap_pop_with_return(MetaDisplay *display,
+                                    gboolean last_request_was_roundtrip) {
+  return gdk_x11_display_error_trap_pop(
+      gdk_x11_lookup_xdisplay(meta_display_get_xdisplay(display)));
 }

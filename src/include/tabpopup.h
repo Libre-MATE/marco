@@ -26,56 +26,49 @@
 #define META_TABPOPUP_H
 
 /* Don't include gtk.h or gdk.h here */
-#include "common.h"
-#include "boxes.h"
 #include <X11/Xlib.h>
-#include <glib.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
+#include <glib.h>
 #include <gtk/gtk.h>
+
+#include "boxes.h"
+#include "common.h"
 
 typedef struct _MetaTabEntry MetaTabEntry;
 typedef struct _MetaTabPopup MetaTabPopup;
 typedef void *MetaTabEntryKey;
 
-typedef enum border_outline_t
-{
+typedef enum border_outline_t {
   BORDER_OUTLINE_WINDOW = 1,
   BORDER_OUTLINE_TAB = 2,
   BORDER_OUTLINE_WORKSPACE = 4
 } border_outline_t;
 
-struct _MetaTabEntry
-{
-  MetaTabEntryKey  key;
-  const char      *title;
-  GdkPixbuf       *icon;
+struct _MetaTabEntry {
+  MetaTabEntryKey key;
+  const char *title;
+  GdkPixbuf *icon;
   cairo_surface_t *win_surface;
-  MetaRectangle    rect;
-  MetaRectangle    inner_rect;
-  guint            blank : 1;
-  guint            hidden : 1;
-  guint            demands_attention : 1;
+  MetaRectangle rect;
+  MetaRectangle inner_rect;
+  guint blank : 1;
+  guint hidden : 1;
+  guint demands_attention : 1;
 };
 
-MetaTabPopup*   meta_ui_tab_popup_new          (const MetaTabEntry *entries,
-                                                int                 entry_count,
-                                                int                 width,
-                                                gboolean            expand_for_titles,
-                                                gboolean            outline);
-void            meta_ui_tab_popup_free         (MetaTabPopup       *popup);
-void            meta_ui_tab_popup_set_showing  (MetaTabPopup       *popup,
-                                                gboolean            showing);
-void            meta_ui_tab_popup_forward      (MetaTabPopup       *popup);
-void            meta_ui_tab_popup_backward     (MetaTabPopup       *popup);
-void            meta_ui_tab_popup_down         (MetaTabPopup       *popup);
-void            meta_ui_tab_popup_up           (MetaTabPopup       *popup);
-MetaTabEntryKey meta_ui_tab_popup_get_selected (MetaTabPopup      *popup);
-void            meta_ui_tab_popup_select       (MetaTabPopup       *popup,
-                                                MetaTabEntryKey     key);
-GtkWidget*      meta_ui_tab_popup_get_widget   (MetaTabPopup       *popup);
-void            meta_ui_tab_popup_mouse_press  (MetaTabPopup       *popup,
-                                                gint                x,
-                                                gint                y);
+MetaTabPopup *meta_ui_tab_popup_new(const MetaTabEntry *entries,
+                                    int entry_count, int width,
+                                    gboolean expand_for_titles,
+                                    gboolean outline);
+void meta_ui_tab_popup_free(MetaTabPopup *popup);
+void meta_ui_tab_popup_set_showing(MetaTabPopup *popup, gboolean showing);
+void meta_ui_tab_popup_forward(MetaTabPopup *popup);
+void meta_ui_tab_popup_backward(MetaTabPopup *popup);
+void meta_ui_tab_popup_down(MetaTabPopup *popup);
+void meta_ui_tab_popup_up(MetaTabPopup *popup);
+MetaTabEntryKey meta_ui_tab_popup_get_selected(MetaTabPopup *popup);
+void meta_ui_tab_popup_select(MetaTabPopup *popup, MetaTabEntryKey key);
+GtkWidget *meta_ui_tab_popup_get_widget(MetaTabPopup *popup);
+void meta_ui_tab_popup_mouse_press(MetaTabPopup *popup, gint x, gint y);
 
 #endif
-

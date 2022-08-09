@@ -22,10 +22,10 @@
 #ifndef META_TYPES_H
 #define META_TYPES_H
 
-typedef struct _MetaCompositor  MetaCompositor;
-typedef struct _MetaDisplay     MetaDisplay;
-typedef struct _MetaFrame       MetaFrame;
-typedef struct _MetaScreen      MetaScreen;
-typedef struct _MetaWindow      MetaWindow;
+typedef struct _MetaCompositor MetaCompositor;
+typedef struct _MetaDisplay MetaDisplay;
+typedef struct _MetaFrame MetaFrame;
+typedef struct _MetaScreen MetaScreen;
+typedef struct _MetaWindow MetaWindow;
 
 #endif

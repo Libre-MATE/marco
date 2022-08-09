@@ -24,14 +24,10 @@
 #ifndef META_PLACE_H
 #define META_PLACE_H
 
-#include "window-private.h"
 #include "frame-private.h"
+#include "window-private.h"
 
-void meta_window_place (MetaWindow       *window,
-                        MetaFrameBorders *borders,
-                        int               x,
-                        int               y,
-                        int              *new_x,
-                        int              *new_y);
+void meta_window_place(MetaWindow *window, MetaFrameBorders *borders, int x,
+                       int y, int *new_x, int *new_y);
 
 #endif

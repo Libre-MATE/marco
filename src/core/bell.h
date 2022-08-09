@@ -52,7 +52,7 @@
  * \param display  The display the bell event came in on
  * \param xkb_ev   The bell event we just received
  */
-void meta_bell_notify (MetaDisplay *display, XkbAnyEvent *xkb_ev);
+void meta_bell_notify(MetaDisplay *display, XkbAnyEvent *xkb_ev);
 #endif
 
 /**
@@ -64,7 +64,7 @@ void meta_bell_notify (MetaDisplay *display, XkbAnyEvent *xkb_ev);
  * \param display  The display we're configuring
  * \param audible  True for an audible bell, false for a visual bell
  */
-void meta_bell_set_audible (MetaDisplay *display, gboolean audible);
+void meta_bell_set_audible(MetaDisplay *display, gboolean audible);
 
 /**
  * Initialises the bell subsystem. This involves intialising
@@ -87,7 +87,7 @@ void meta_bell_set_audible (MetaDisplay *display, gboolean audible);
  * that XFree86's implementation is broken so we shouldn't
  * call it, but that was in 2002. Is it working now?
  */
-gboolean meta_bell_init (MetaDisplay *display);
+gboolean meta_bell_init(MetaDisplay *display);
 
 /**
  * Shuts down the bell subsystem.
@@ -98,7 +98,7 @@ gboolean meta_bell_init (MetaDisplay *display);
  * enabled in meta_bell_init(), this wouldn't be a problem, but
  * we don't.
  */
-void meta_bell_shutdown (MetaDisplay *display);
+void meta_bell_shutdown(MetaDisplay *display);
 
 /**
  * Deals with a frame being destroyed. This is important because if we're
@@ -108,6 +108,6 @@ void meta_bell_shutdown (MetaDisplay *display);
  *
  * \param frame  The frame which is being destroyed
  */
-void meta_bell_notify_frame_destroy (MetaFrame *frame);
+void meta_bell_notify_frame_destroy(MetaFrame *frame);
 
 #endif /* __BELL_H__ */

@@ -45,11 +45,10 @@
 #ifndef META_EFFECTS_H
 #define META_EFFECTS_H
 
-#include "util.h"
 #include "screen-private.h"
+#include "util.h"
 
-typedef enum
-{
+typedef enum {
   META_EFFECT_MINIMIZE,
   META_EFFECT_UNMINIMIZE,
   META_EFFECT_FOCUS,
@@ -60,7 +59,7 @@ typedef enum
 /**
  * A callback which will be called when the effect has finished.
  */
-typedef void (* MetaEffectFinished) (gpointer    data);
+typedef void (*MetaEffectFinished)(gpointer data);
 
 /**
  * Performs the minimize effect.
@@ -71,11 +70,9 @@ typedef void (* MetaEffectFinished) (gpointer    data);
  * \param finished     Callback for when it's finished
  * \param data         Data for callback
  */
-void        meta_effect_run_minimize     (MetaWindow         *window,
-                                          MetaRectangle	     *window_rect,
-                                          MetaRectangle	     *target,
-                                          MetaEffectFinished  finished,
-                                          gpointer            data);
+void meta_effect_run_minimize(MetaWindow *window, MetaRectangle *window_rect,
+                              MetaRectangle *target,
+                              MetaEffectFinished finished, gpointer data);
 
 /**
  * Performs the unminimize effect.  There is no such effect.
@@ -87,11 +84,9 @@ void        meta_effect_run_minimize     (MetaWindow         *window,
  * \param finished     Callback for when it's finished
  * \param data         Data for callback
  */
-void        meta_effect_run_unminimize (MetaWindow         *window,
-                                          MetaRectangle      *window_rect,
-                                          MetaRectangle      *icon_rect,
-                                          MetaEffectFinished  finished,
-                                          gpointer            data);
+void meta_effect_run_unminimize(MetaWindow *window, MetaRectangle *window_rect,
+                                MetaRectangle *icon_rect,
+                                MetaEffectFinished finished, gpointer data);
 
 /**
  * Performs the close effect.  There is no such effect.
@@ -101,9 +96,8 @@ void        meta_effect_run_unminimize (MetaWindow         *window,
  * \param finished     Callback for when it's finished
  * \param data         Data for callback
  */
-void        meta_effect_run_close        (MetaWindow         *window,
-                                          MetaEffectFinished  finished,
-                                          gpointer            data);
+void meta_effect_run_close(MetaWindow *window, MetaEffectFinished finished,
+                           gpointer data);
 
 /**
  * Performs the focus effect.  There is no such effect.
@@ -113,9 +107,8 @@ void        meta_effect_run_close        (MetaWindow         *window,
  * \param finished     Callback for when it's finished
  * \param data         Data for callback
  */
-void        meta_effect_run_focus        (MetaWindow         *window,
-                                          MetaEffectFinished  finished,
-                                          gpointer            data);
+void meta_effect_run_focus(MetaWindow *window, MetaEffectFinished finished,
+                           gpointer data);
 
 /**
  * Grabs the server and paints a wireframe rectangle on the screen.
@@ -129,10 +122,8 @@ void        meta_effect_run_focus        (MetaWindow         *window,
  * \param width   The width to display in the middle (or 0 not to)
  * \param height  The width to display in the middle (or 0 not to)
  */
-void meta_effects_begin_wireframe  (MetaScreen          *screen,
-                                    const MetaRectangle *rect,
-                                    int                  width,
-                                    int                  height);
+void meta_effects_begin_wireframe(MetaScreen *screen, const MetaRectangle *rect,
+                                  int width, int height);
 
 /**
  * Moves a wireframe rectangle around after its creation by
@@ -146,13 +137,11 @@ void meta_effects_begin_wireframe  (MetaScreen          *screen,
  * \param new_width The width that will be displayed on it (or 0 not to)
  * \param new_height The height that will be displayed on it (or 0 not to)
  */
-void meta_effects_update_wireframe (MetaScreen          *screen,
-                                    const MetaRectangle *old_rect,
-                                    int                  old_width,
-                                    int                  old_height,
-                                    const MetaRectangle *new_rect,
-                                    int                  new_width,
-                                    int                  new_height);
+void meta_effects_update_wireframe(MetaScreen *screen,
+                                   const MetaRectangle *old_rect, int old_width,
+                                   int old_height,
+                                   const MetaRectangle *new_rect, int new_width,
+                                   int new_height);
 
 /**
  * Removes a wireframe rectangle from the screen and ends the grab started by
@@ -162,9 +151,8 @@ void meta_effects_update_wireframe (MetaScreen          *screen,
  * \param old_width The width that was displayed on it (or 0 if there wasn't)
  * \param old_height The height that was displayed on it (or 0 if there wasn't)
  */
-void meta_effects_end_wireframe    (MetaScreen          *screen,
-                                    const MetaRectangle *old_rect,
-                                    int                  width,
-                                    int                  height);
+void meta_effects_end_wireframe(MetaScreen *screen,
+                                const MetaRectangle *old_rect, int width,
+                                int height);
 
 #endif /* META_EFFECTS_H */

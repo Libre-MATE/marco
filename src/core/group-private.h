@@ -26,8 +26,7 @@
 
 #include "group.h"
 
-struct _MetaGroup
-{
+struct _MetaGroup {
   int refcount;
   MetaDisplay *display;
   GSList *windows;
@@ -37,4 +36,3 @@ struct _MetaGroup
 };
 
 #endif
-

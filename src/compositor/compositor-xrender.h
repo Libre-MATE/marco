@@ -26,6 +26,6 @@
 
 #include "types.h"
 
-MetaCompositor *meta_compositor_xrender_new (MetaDisplay *display);
+MetaCompositor *meta_compositor_xrender_new(MetaDisplay *display);
 
 #endif

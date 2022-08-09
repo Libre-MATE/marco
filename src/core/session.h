@@ -35,8 +35,7 @@
 
 typedef struct _MetaWindowSessionInfo MetaWindowSessionInfo;
 
-struct _MetaWindowSessionInfo
-{
+struct _MetaWindowSessionInfo {
   /* Fields we use to match against */
 
   char *id;
@@ -75,13 +74,11 @@ struct _MetaWindowSessionInfo
 /* If lookup_saved_state returns something, it should be used,
  * and then released when you're done with it.
  */
-const MetaWindowSessionInfo* meta_window_lookup_saved_state  (MetaWindow                  *window);
-void                         meta_window_release_saved_state (const MetaWindowSessionInfo *info);
+const MetaWindowSessionInfo *meta_window_lookup_saved_state(MetaWindow *window);
+void meta_window_release_saved_state(const MetaWindowSessionInfo *info);
 
-void meta_session_init (const char *client_id,
-                        const char *save_file);
+void meta_session_init(const char *client_id, const char *save_file);
 
-void meta_session_shutdown (void);
+void meta_session_shutdown(void);
 
 #endif
-

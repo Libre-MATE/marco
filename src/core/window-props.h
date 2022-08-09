@@ -42,9 +42,8 @@
  * \param window     The window.
  * \param property   A single X atom.
  */
-void meta_window_reload_property   (MetaWindow *window,
-                                    Atom        property,
-                                    gboolean    initial);
+void meta_window_reload_property(MetaWindow *window, Atom property,
+                                 gboolean initial);
 
 /**
  * Requests the current values of a set of properties for a given
@@ -55,10 +54,8 @@ void meta_window_reload_property   (MetaWindow *window,
  * \param properties  A pointer to a list of X atoms, "n_properties" long.
  * \param n_properties  The length of the properties list.
  */
-void meta_window_reload_properties (MetaWindow *window,
-                                    const Atom *properties,
-                                    int         n_properties,
-                                    gboolean    initial);
+void meta_window_reload_properties(MetaWindow *window, const Atom *properties,
+                                   int n_properties, gboolean initial);
 
 /**
  * Requests the current values of a single property for a given
@@ -70,11 +67,9 @@ void meta_window_reload_properties (MetaWindow *window,
  * \param xwindow    The X handle for the window.
  * \param property   A single X atom.
  */
-void meta_window_reload_property_from_xwindow
-                                   (MetaWindow *window,
-                                    Window      xwindow,
-                                    Atom        property,
-                                    gboolean    initial);
+void meta_window_reload_property_from_xwindow(MetaWindow *window,
+                                              Window xwindow, Atom property,
+                                              gboolean initial);
 
 /**
  * Requests the current values of a set of properties for a given
@@ -87,12 +82,11 @@ void meta_window_reload_property_from_xwindow
  * \param properties  A pointer to a list of X atoms, "n_properties" long.
  * \param n_properties  The length of the properties list.
  */
-void meta_window_reload_properties_from_xwindow
-                                   (MetaWindow *window,
-                                    Window      xwindow,
-                                    const Atom *properties,
-                                    int         n_properties,
-                                    gboolean    initial);
+void meta_window_reload_properties_from_xwindow(MetaWindow *window,
+                                                Window xwindow,
+                                                const Atom *properties,
+                                                int n_properties,
+                                                gboolean initial);
 
 /**
  * Initialises the hooks used for the reload_propert* functions
@@ -101,7 +95,7 @@ void meta_window_reload_properties_from_xwindow
  *
  * \param display  The display.
  */
-void meta_display_init_window_prop_hooks (MetaDisplay *display);
+void meta_display_init_window_prop_hooks(MetaDisplay *display);
 
 /**
  * Frees the hooks used for the reload_propert* functions
@@ -109,7 +103,7 @@ void meta_display_init_window_prop_hooks (MetaDisplay *display);
  *
  * \param display  The display.
  */
-void meta_display_free_window_prop_hooks (MetaDisplay *display);
+void meta_display_free_window_prop_hooks(MetaDisplay *display);
 
 /**
  * Sets the size hints for a window.  This happens when a
@@ -122,7 +116,6 @@ void meta_display_free_window_prop_hooks (MetaDisplay *display);
  * \param window   The window to set the size hints on.
  * \param hints    Either some X size hints, or NULL for default.
  */
-void meta_set_normal_hints (MetaWindow *window,
-			    XSizeHints *hints);
+void meta_set_normal_hints(MetaWindow *window, XSizeHints *hints);
 
 #endif /* META_WINDOW_PROPS_H */

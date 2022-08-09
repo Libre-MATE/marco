@@ -24,39 +24,27 @@
 
 #include "compositor.h"
 
-struct _MetaCompositor
-{
-  void (* destroy) (MetaCompositor *compositor);
+struct _MetaCompositor {
+  void (*destroy)(MetaCompositor *compositor);
 
-  void (*manage_screen) (MetaCompositor *compositor,
-                         MetaScreen     *screen);
-  void (*unmanage_screen) (MetaCompositor *compositor,
-                           MetaScreen     *screen);
-  void (*add_window) (MetaCompositor    *compositor,
-                      MetaWindow        *window,
-                      Window             xwindow,
-                      XWindowAttributes *attrs);
-  void (*remove_window) (MetaCompositor *compositor,
-                         Window          xwindow);
-  void (*set_updates) (MetaCompositor *compositor,
-                       MetaWindow     *window,
-                       gboolean        update);
-  void (*process_event) (MetaCompositor *compositor,
-                         XEvent         *event,
-                         MetaWindow     *window);
-  cairo_surface_t *(* get_window_surface) (MetaCompositor *compositor,
-                                           MetaWindow     *window);
-  void (*set_active_window) (MetaCompositor *compositor,
-                             MetaScreen     *screen,
-                             MetaWindow     *window);
+  void (*manage_screen)(MetaCompositor *compositor, MetaScreen *screen);
+  void (*unmanage_screen)(MetaCompositor *compositor, MetaScreen *screen);
+  void (*add_window)(MetaCompositor *compositor, MetaWindow *window,
+                     Window xwindow, XWindowAttributes *attrs);
+  void (*remove_window)(MetaCompositor *compositor, Window xwindow);
+  void (*set_updates)(MetaCompositor *compositor, MetaWindow *window,
+                      gboolean update);
+  void (*process_event)(MetaCompositor *compositor, XEvent *event,
+                        MetaWindow *window);
+  cairo_surface_t *(*get_window_surface)(MetaCompositor *compositor,
+                                         MetaWindow *window);
+  void (*set_active_window)(MetaCompositor *compositor, MetaScreen *screen,
+                            MetaWindow *window);
 
-  void (*free_window) (MetaCompositor *compositor,
-                       MetaWindow     *window);
+  void (*free_window)(MetaCompositor *compositor, MetaWindow *window);
 
-  void (*maximize_window)   (MetaCompositor *compositor,
-                             MetaWindow     *window);
-  void (*unmaximize_window) (MetaCompositor *compositor,
-                             MetaWindow     *window);
+  void (*maximize_window)(MetaCompositor *compositor, MetaWindow *window);
+  void (*unmaximize_window)(MetaCompositor *compositor, MetaWindow *window);
 };
 
 #endif

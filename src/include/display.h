@@ -22,24 +22,26 @@
 #ifndef META_DISPLAY_H
 #define META_DISPLAY_H
 
-#include <glib.h>
 #include <X11/Xlib.h>
+#include <glib.h>
 
 #include "types.h"
 
-#define meta_XFree(p) do { if ((p)) XFree ((p)); } while (0)
+#define meta_XFree(p)    \
+  do {                   \
+    if ((p)) XFree((p)); \
+  } while (0)
 
-Display *meta_display_get_xdisplay (MetaDisplay *display);
-MetaCompositor *meta_display_get_compositor (MetaDisplay *display);
-GSList *meta_display_get_screens (MetaDisplay *display);
+Display *meta_display_get_xdisplay(MetaDisplay *display);
+MetaCompositor *meta_display_get_compositor(MetaDisplay *display);
+GSList *meta_display_get_screens(MetaDisplay *display);
 
-gboolean meta_display_has_shape (MetaDisplay *display);
+gboolean meta_display_has_shape(MetaDisplay *display);
 
-MetaScreen *meta_display_screen_for_root (MetaDisplay *display,
-                                          Window       xroot);
-MetaWindow *meta_display_get_focus_window (MetaDisplay *display);
+MetaScreen *meta_display_screen_for_root(MetaDisplay *display, Window xroot);
+MetaWindow *meta_display_get_focus_window(MetaDisplay *display);
 
-int meta_display_get_damage_event_base (MetaDisplay *display);
-int meta_display_get_shape_event_base (MetaDisplay *display);
+int meta_display_get_damage_event_base(MetaDisplay *display);
+int meta_display_get_shape_event_base(MetaDisplay *display);
 
 #endif

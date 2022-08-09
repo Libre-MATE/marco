@@ -27,8 +27,7 @@
 #include "common.h"
 #include "types.h"
 
-Window meta_frame_get_xwindow (MetaFrame *frame);
-void   meta_frame_calc_borders (MetaFrame        *frame,
-                                MetaFrameBorders *borders);
+Window meta_frame_get_xwindow(MetaFrame *frame);
+void meta_frame_calc_borders(MetaFrame *frame, MetaFrameBorders *borders);
 
 #endif

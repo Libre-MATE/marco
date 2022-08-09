@@ -27,8 +27,7 @@
 #include "frame.h"
 #include "window-private.h"
 
-struct _MetaFrame
-{
+struct _MetaFrame {
   /* window we frame */
   MetaWindow *window;
 
@@ -53,27 +52,21 @@ struct _MetaFrame
   guint is_flashing : 1; /* used by the visual bell flash */
 };
 
-void     meta_window_ensure_frame           (MetaWindow *window);
-void     meta_window_destroy_frame          (MetaWindow *window);
-void     meta_frame_queue_draw              (MetaFrame  *frame);
+void meta_window_ensure_frame(MetaWindow *window);
+void meta_window_destroy_frame(MetaWindow *window);
+void meta_frame_queue_draw(MetaFrame *frame);
 
-MetaFrameFlags meta_frame_get_flags (MetaFrame *frame);
+MetaFrameFlags meta_frame_get_flags(MetaFrame *frame);
 
-void meta_frame_get_corner_radiuses (MetaFrame *frame,
-                                     float     *top_left,
-                                     float     *top_right,
-                                     float     *bottom_left,
-                                     float     *bottom_right);
+void meta_frame_get_corner_radiuses(MetaFrame *frame, float *top_left,
+                                    float *top_right, float *bottom_left,
+                                    float *bottom_right);
 
-gboolean meta_frame_sync_to_window (MetaFrame         *frame,
-                                   int               gravity,
-                                   gboolean          need_move,
-                                   gboolean          need_resize);
+gboolean meta_frame_sync_to_window(MetaFrame *frame, int gravity,
+                                   gboolean need_move, gboolean need_resize);
 
-cairo_region_t *meta_frame_get_frame_bounds (MetaFrame *frame);
+cairo_region_t *meta_frame_get_frame_bounds(MetaFrame *frame);
 
-void meta_frame_set_screen_cursor (MetaFrame        *frame,
-                                   MetaCursor        cursor);
+void meta_frame_set_screen_cursor(MetaFrame *frame, MetaCursor cursor);
 
 #endif
-

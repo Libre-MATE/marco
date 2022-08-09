@@ -169,4 +169,3 @@ item(_NET_WM_STATE_FOCUSED)
 #endif
 
 /* eof atomnames.h */
-

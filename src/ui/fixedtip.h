@@ -51,13 +51,12 @@
  * \param  root_y         The Y coordinate where the tooltip should appear
  * \param  markup_text    Text to display in the tooltip; can contain markup
  */
-void meta_fixed_tip_show (int root_x, int root_y,
-                          const char *markup_text);
+void meta_fixed_tip_show(int root_x, int root_y, const char *markup_text);
 
 /**
  * Removes the tooltip that was created by meta_fixed_tip_show().  If there
  * is no tooltip currently visible, this is a no-op.
  */
-void meta_fixed_tip_hide (void);
+void meta_fixed_tip_hide(void);
 
 #endif

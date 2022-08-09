@@ -28,8 +28,7 @@
 
 typedef struct _MetaIconCache MetaIconCache;
 
-typedef enum
-{
+typedef enum {
   /* These MUST be in ascending order of preference;
    * i.e. if we get _NET_WM_ICON and already have
    * WM_HINTS, we prefer _NET_WM_ICON
@@ -41,8 +40,7 @@ typedef enum
   USING_NET_WM_ICON
 } IconOrigin;
 
-struct _MetaIconCache
-{
+struct _MetaIconCache {
   int origin;
   Pixmap prev_pixmap;
   Pixmap prev_mask;
@@ -57,26 +55,18 @@ struct _MetaIconCache
   guint fallback_icon_dirty_forced : 1;
 };
 
-void           meta_icon_cache_init                 (MetaIconCache *icon_cache);
-void           meta_icon_cache_free                 (MetaIconCache *icon_cache);
-void           meta_icon_cache_invalidate           (MetaIconCache *icon_cache);
-void           meta_icon_cache_property_changed     (MetaIconCache *icon_cache,
-                                                     MetaDisplay   *display,
-                                                     Atom           atom);
-gboolean       meta_icon_cache_get_icon_invalidated (MetaIconCache *icon_cache);
+void meta_icon_cache_init(MetaIconCache *icon_cache);
+void meta_icon_cache_free(MetaIconCache *icon_cache);
+void meta_icon_cache_invalidate(MetaIconCache *icon_cache);
+void meta_icon_cache_property_changed(MetaIconCache *icon_cache,
+                                      MetaDisplay *display, Atom atom);
+gboolean meta_icon_cache_get_icon_invalidated(MetaIconCache *icon_cache);
 
-gboolean meta_read_icons         (MetaScreen     *screen,
-                                  Window          xwindow,
-                                  char           *res_name,
-                                  MetaIconCache  *icon_cache,
-                                  Pixmap          wm_hints_pixmap,
-                                  Pixmap          wm_hints_mask,
-                                  GdkPixbuf     **iconp,
-                                  int             ideal_width,
-                                  int             ideal_height,
-                                  GdkPixbuf     **mini_iconp,
-                                  int             ideal_mini_width,
-                                  int             ideal_mini_height);
+gboolean meta_read_icons(MetaScreen *screen, Window xwindow, char *res_name,
+                         MetaIconCache *icon_cache, Pixmap wm_hints_pixmap,
+                         Pixmap wm_hints_mask, GdkPixbuf **iconp,
+                         int ideal_width, int ideal_height,
+                         GdkPixbuf **mini_iconp, int ideal_mini_width,
+                         int ideal_mini_height);
 
 #endif
-

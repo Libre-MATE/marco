@@ -21,16 +21,19 @@
  * 02110-1301, USA.
  */
 
+#ifdef HAVE_CONFIG_H
 #include <config.h>
-#include <glib/gi18n-lib.h>
+#endif
 
 #include "resizepopup.h"
-#include "util.h"
-#include <gtk/gtk.h>
-#include <gdk/gdkx.h>
 
-struct _MetaResizePopup
-{
+#include <gdk/gdkx.h>
+#include <glib/gi18n-lib.h>
+#include <gtk/gtk.h>
+
+#include "util.h"
+
+struct _MetaResizePopup {
   GtkWidget *size_window;
   GtkWidget *size_label;
   Display *display;
@@ -44,13 +47,10 @@ struct _MetaResizePopup
   MetaRectangle rect;
 };
 
-MetaResizePopup*
-meta_ui_resize_popup_new (Display *display,
-                          int      screen_number)
-{
+MetaResizePopup *meta_ui_resize_popup_new(Display *display, int screen_number) {
   MetaResizePopup *popup;
 
-  popup = g_new0 (MetaResizePopup, 1);
+  popup = g_new0(MetaResizePopup, 1);
 
   popup->display = display;
   popup->screen_number = screen_number;
@@ -58,172 +58,137 @@ meta_ui_resize_popup_new (Display *display,
   return popup;
 }
 
-void
-meta_ui_resize_popup_free (MetaResizePopup *popup)
-{
-  g_return_if_fail (popup != NULL);
+void meta_ui_resize_popup_free(MetaResizePopup *popup) {
+  g_return_if_fail(popup != NULL);
 
-  if (popup->size_window)
-    gtk_widget_destroy (popup->size_window);
+  if (popup->size_window) gtk_widget_destroy(popup->size_window);
 
-  g_free (popup);
+  g_free(popup);
 }
 
-static void
-ensure_size_window (MetaResizePopup *popup)
-{
+static void ensure_size_window(MetaResizePopup *popup) {
   GtkWidget *frame;
 
-  if (popup->size_window)
-    return;
+  if (popup->size_window) return;
 
-  popup->size_window = gtk_window_new (GTK_WINDOW_POPUP);
+  popup->size_window = gtk_window_new(GTK_WINDOW_POPUP);
 
-  gtk_window_set_screen (GTK_WINDOW (popup->size_window),
-			 gdk_display_get_default_screen (gdk_x11_lookup_xdisplay (popup->display)));
+  gtk_window_set_screen(
+      GTK_WINDOW(popup->size_window),
+      gdk_display_get_default_screen(gdk_x11_lookup_xdisplay(popup->display)));
 
   /* never shrink the size window */
-  gtk_window_set_resizable (GTK_WINDOW (popup->size_window),
-                            TRUE);
+  gtk_window_set_resizable(GTK_WINDOW(popup->size_window), TRUE);
 
-  frame = gtk_frame_new (NULL);
-  gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_OUT);
+  frame = gtk_frame_new(NULL);
+  gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_OUT);
 
-  gtk_container_add (GTK_CONTAINER (popup->size_window), frame);
+  gtk_container_add(GTK_CONTAINER(popup->size_window), frame);
 
-  popup->size_label = gtk_label_new ("");
-  gtk_widget_set_margin_start (popup->size_label, 3);
-  gtk_widget_set_margin_end (popup->size_label, 3);
-  gtk_widget_set_margin_top (popup->size_label, 3);
-  gtk_widget_set_margin_bottom (popup->size_label, 3);
+  popup->size_label = gtk_label_new("");
+  gtk_widget_set_margin_start(popup->size_label, 3);
+  gtk_widget_set_margin_end(popup->size_label, 3);
+  gtk_widget_set_margin_top(popup->size_label, 3);
+  gtk_widget_set_margin_bottom(popup->size_label, 3);
 
-  gtk_container_add (GTK_CONTAINER (frame), popup->size_label);
+  gtk_container_add(GTK_CONTAINER(frame), popup->size_label);
 
-  gtk_widget_show_all (frame);
+  gtk_widget_show_all(frame);
 }
 
-static void
-update_size_window (MetaResizePopup *popup)
-{
+static void update_size_window(MetaResizePopup *popup) {
   char *str;
   int x, y;
   int width, height;
   int scale;
 
-  g_return_if_fail (popup->size_window != NULL);
+  g_return_if_fail(popup->size_window != NULL);
 
-  scale = gtk_widget_get_scale_factor (GTK_WIDGET (popup->size_window));
+  scale = gtk_widget_get_scale_factor(GTK_WIDGET(popup->size_window));
   /* Translators: This represents the size of a window.  The first number is
    * the width of the window and the second is the height.
    */
-  str = g_strdup_printf (_("%d x %d"),
-                         popup->horizontal_size,
-                         popup->vertical_size);
+  str = g_strdup_printf(_("%d x %d"), popup->horizontal_size,
+                        popup->vertical_size);
 
-  gtk_label_set_text (GTK_LABEL (popup->size_label), str);
+  gtk_label_set_text(GTK_LABEL(popup->size_label), str);
 
-  g_free (str);
+  g_free(str);
 
-  gtk_window_get_size (GTK_WINDOW (popup->size_window), &width, &height);
+  gtk_window_get_size(GTK_WINDOW(popup->size_window), &width, &height);
 
   x = popup->rect.x + (popup->rect.width - width) / 2;
   y = popup->rect.y + (popup->rect.height - height) / 2;
 
-  if (scale)
-    {
-      x = x / scale;
-      y = y / scale;
-    }
+  if (scale) {
+    x = x / scale;
+    y = y / scale;
+  }
 
-  if (gtk_widget_get_realized (popup->size_window))
-    {
-      /* using move_resize to avoid jumpiness */
-      gdk_window_move_resize (gtk_widget_get_window (popup->size_window),
-                              x, y,
-                              width, height);
-    }
-  else
-    {
-      gtk_window_move   (GTK_WINDOW (popup->size_window),
-                         x, y);
-    }
+  if (gtk_widget_get_realized(popup->size_window)) {
+    /* using move_resize to avoid jumpiness */
+    gdk_window_move_resize(gtk_widget_get_window(popup->size_window), x, y,
+                           width, height);
+  } else {
+    gtk_window_move(GTK_WINDOW(popup->size_window), x, y);
+  }
 }
 
-static void
-sync_showing (MetaResizePopup *popup)
-{
-  if (popup->showing)
-    {
-      if (popup->size_window)
-        gtk_widget_show (popup->size_window);
+static void sync_showing(MetaResizePopup *popup) {
+  if (popup->showing) {
+    if (popup->size_window) gtk_widget_show(popup->size_window);
 
-      if (popup->size_window && gtk_widget_get_realized (popup->size_window))
-        gdk_window_raise (gtk_widget_get_window(GTK_WIDGET(popup->size_window)));
-    }
-  else
-    {
-      if (popup->size_window)
-        gtk_widget_hide (popup->size_window);
-    }
+    if (popup->size_window && gtk_widget_get_realized(popup->size_window))
+      gdk_window_raise(gtk_widget_get_window(GTK_WIDGET(popup->size_window)));
+  } else {
+    if (popup->size_window) gtk_widget_hide(popup->size_window);
+  }
 }
 
-void
-meta_ui_resize_popup_set (MetaResizePopup *popup,
-                          MetaRectangle    rect,
-                          int              base_width,
-                          int              base_height,
-                          int              width_inc,
-                          int              height_inc)
-{
+void meta_ui_resize_popup_set(MetaResizePopup *popup, MetaRectangle rect,
+                              int base_width, int base_height, int width_inc,
+                              int height_inc) {
   gboolean need_update_size;
   int display_w, display_h;
 
-  g_return_if_fail (popup != NULL);
+  g_return_if_fail(popup != NULL);
 
   need_update_size = FALSE;
 
   display_w = rect.width - base_width;
-  if (width_inc > 0)
-    display_w /= width_inc;
+  if (width_inc > 0) display_w /= width_inc;
 
   display_h = rect.height - base_height;
-  if (height_inc > 0)
-    display_h /= height_inc;
+  if (height_inc > 0) display_h /= height_inc;
 
   if (!meta_rectangle_equal(&popup->rect, &rect) ||
-      display_w != popup->horizontal_size ||
-      display_h != popup->vertical_size)
+      display_w != popup->horizontal_size || display_h != popup->vertical_size)
     need_update_size = TRUE;
 
   popup->rect = rect;
   popup->vertical_size = display_h;
   popup->horizontal_size = display_w;
 
-  if (need_update_size)
-    {
-      ensure_size_window (popup);
-      update_size_window (popup);
-    }
+  if (need_update_size) {
+    ensure_size_window(popup);
+    update_size_window(popup);
+  }
 
-  sync_showing (popup);
+  sync_showing(popup);
 }
 
-void
-meta_ui_resize_popup_set_showing  (MetaResizePopup *popup,
-                                   gboolean         showing)
-{
-  g_return_if_fail (popup != NULL);
+void meta_ui_resize_popup_set_showing(MetaResizePopup *popup,
+                                      gboolean showing) {
+  g_return_if_fail(popup != NULL);
 
-  if (showing == popup->showing)
-    return;
+  if (showing == popup->showing) return;
 
   popup->showing = !!showing;
 
-  if (popup->showing)
-    {
-      ensure_size_window (popup);
-      update_size_window (popup);
-    }
+  if (popup->showing) {
+    ensure_size_window(popup);
+    update_size_window(popup);
+  }
 
-  sync_showing (popup);
+  sync_showing(popup);
 }

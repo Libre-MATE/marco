@@ -24,17 +24,15 @@
 #ifndef META_EVENT_QUEUE_H
 #define META_EVENT_QUEUE_H
 
-#include <glib.h>
 #include <X11/Xlib.h>
+#include <glib.h>
 
 typedef struct _MetaEventQueue MetaEventQueue;
 
-typedef void   (* MetaEventQueueFunc) (XEvent         *event,
-                                       gpointer        data);
+typedef void (*MetaEventQueueFunc)(XEvent *event, gpointer data);
 
-MetaEventQueue* meta_event_queue_new  (Display            *display,
-                                       MetaEventQueueFunc  func,
-                                       gpointer            data);
-void            meta_event_queue_free (MetaEventQueue     *eq);
+MetaEventQueue *meta_event_queue_new(Display *display, MetaEventQueueFunc func,
+                                     gpointer data);
+void meta_event_queue_free(MetaEventQueue *eq);
 
 #endif

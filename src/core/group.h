@@ -27,24 +27,21 @@
 #include "window-private.h"
 
 /* note, can return NULL */
-MetaGroup* meta_window_get_group       (MetaWindow *window);
-void       meta_window_compute_group   (MetaWindow* window);
-void       meta_window_shutdown_group  (MetaWindow *window);
+MetaGroup *meta_window_get_group(MetaWindow *window);
+void meta_window_compute_group(MetaWindow *window);
+void meta_window_shutdown_group(MetaWindow *window);
 
-void       meta_window_group_leader_changed (MetaWindow *window);
+void meta_window_group_leader_changed(MetaWindow *window);
 
 /* note, can return NULL */
-MetaGroup* meta_display_lookup_group   (MetaDisplay *display,
-                                        Window       group_leader);
+MetaGroup *meta_display_lookup_group(MetaDisplay *display, Window group_leader);
 
-GSList*    meta_group_list_windows     (MetaGroup *group);
+GSList *meta_group_list_windows(MetaGroup *group);
 
-void       meta_group_update_layers    (MetaGroup *group);
+void meta_group_update_layers(MetaGroup *group);
 
-const char* meta_group_get_startup_id  (MetaGroup *group);
+const char *meta_group_get_startup_id(MetaGroup *group);
 
-gboolean meta_group_property_notify   (MetaGroup  *group,
-                                       XEvent     *event);
+gboolean meta_group_property_notify(MetaGroup *group, XEvent *event);
 
 #endif
-

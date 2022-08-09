@@ -28,12 +28,11 @@
 #ifndef WNCK_DRAW_WORKSPACE_H
 #define WNCK_DRAW_WORKSPACE_H
 
-#include <gdk/gdk.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
+#include <gdk/gdk.h>
 #include <gtk/gtk.h>
 
-typedef struct
-{
+typedef struct {
   GdkPixbuf *icon;
   GdkPixbuf *mini_icon;
   int x;
@@ -45,17 +44,10 @@ typedef struct
 
 } WnckWindowDisplayInfo;
 
-void wnck_draw_workspace (GtkWidget                   *widget,
-                          cairo_t                     *cr,
-                          int                          x,
-                          int                          y,
-                          int                          width,
-                          int                          height,
-                          int                          screen_width,
-                          int                          screen_height,
-                          GdkPixbuf                   *workspace_background,
-                          gboolean                     is_active,
-                          const WnckWindowDisplayInfo *windows,
-                          int                          n_windows);
+void wnck_draw_workspace(GtkWidget *widget, cairo_t *cr, int x, int y,
+                         int width, int height, int screen_width,
+                         int screen_height, GdkPixbuf *workspace_background,
+                         gboolean is_active,
+                         const WnckWindowDisplayInfo *windows, int n_windows);
 
 #endif

@@ -26,11 +26,11 @@
 #define META_PREFS_H
 
 /* This header is a "common" one between the UI and core side */
-#include "common.h"
 #include <pango/pango-font.h>
 
-typedef enum
-{
+#include "common.h"
+
+typedef enum {
   META_PREF_MOUSE_BUTTON_MODS,
   META_PREF_FOCUS_MODE,
   META_PREF_FOCUS_NEW_WINDOWS,
@@ -76,94 +76,89 @@ typedef enum
   META_PREF_SHOW_DESKTOP_SKIP_LIST
 } MetaPreference;
 
-typedef void (* MetaPrefsChangedFunc) (MetaPreference pref,
-                                       gpointer       data);
+typedef void (*MetaPrefsChangedFunc)(MetaPreference pref, gpointer data);
 
-void meta_prefs_add_listener    (MetaPrefsChangedFunc func,
-                                 gpointer             data);
-void meta_prefs_remove_listener (MetaPrefsChangedFunc func,
-                                 gpointer             data);
+void meta_prefs_add_listener(MetaPrefsChangedFunc func, gpointer data);
+void meta_prefs_remove_listener(MetaPrefsChangedFunc func, gpointer data);
 
-void meta_prefs_init (void);
-const char* meta_preference_to_string (MetaPreference pref);
+void meta_prefs_init(void);
+const char *meta_preference_to_string(MetaPreference pref);
 
-MetaVirtualModifier         meta_prefs_get_mouse_button_mods  (void);
-guint                       meta_prefs_get_mouse_button_resize (void);
-guint                       meta_prefs_get_mouse_button_menu  (void);
-MetaFocusMode               meta_prefs_get_focus_mode         (void);
-MetaFocusNewWindows         meta_prefs_get_focus_new_windows  (void);
-gboolean                    meta_prefs_get_attach_modal_dialogs (void);
-gboolean                    meta_prefs_get_raise_on_click     (void);
-const char*                 meta_prefs_get_theme              (void);
+MetaVirtualModifier meta_prefs_get_mouse_button_mods(void);
+guint meta_prefs_get_mouse_button_resize(void);
+guint meta_prefs_get_mouse_button_menu(void);
+MetaFocusMode meta_prefs_get_focus_mode(void);
+MetaFocusNewWindows meta_prefs_get_focus_new_windows(void);
+gboolean meta_prefs_get_attach_modal_dialogs(void);
+gboolean meta_prefs_get_raise_on_click(void);
+const char *meta_prefs_get_theme(void);
 /* returns NULL if GTK default should be used */
-const PangoFontDescription* meta_prefs_get_titlebar_font      (void);
-int                         meta_prefs_get_num_workspaces     (void);
-gboolean                    meta_prefs_get_application_based  (void);
-gboolean                    meta_prefs_get_disable_workarounds (void);
-gboolean                    meta_prefs_get_auto_raise         (void);
-int                         meta_prefs_get_auto_raise_delay   (void);
-MetaWrapStyle               meta_prefs_get_wrap_style         (void);
-gboolean                    meta_prefs_get_reduced_resources  (void);
-gboolean                    meta_prefs_get_mate_accessibility (void);
-gboolean                    meta_prefs_get_mate_animations    (void);
-gboolean                    meta_prefs_get_allow_tiling       (void);
-gboolean                    meta_prefs_get_allow_top_tiling   (void);
-gboolean                    meta_prefs_get_allow_tile_cycling (void);
+const PangoFontDescription *meta_prefs_get_titlebar_font(void);
+int meta_prefs_get_num_workspaces(void);
+gboolean meta_prefs_get_application_based(void);
+gboolean meta_prefs_get_disable_workarounds(void);
+gboolean meta_prefs_get_auto_raise(void);
+int meta_prefs_get_auto_raise_delay(void);
+MetaWrapStyle meta_prefs_get_wrap_style(void);
+gboolean meta_prefs_get_reduced_resources(void);
+gboolean meta_prefs_get_mate_accessibility(void);
+gboolean meta_prefs_get_mate_animations(void);
+gboolean meta_prefs_get_allow_tiling(void);
+gboolean meta_prefs_get_allow_top_tiling(void);
+gboolean meta_prefs_get_allow_tile_cycling(void);
 
-const char*                 meta_prefs_get_command            (int i);
+const char *meta_prefs_get_command(int i);
 
-char*                       meta_prefs_get_settings_key_for_command (int i);
+char *meta_prefs_get_settings_key_for_command(int i);
 
-const char*                 meta_prefs_get_terminal_command   (void);
-const char*                 meta_prefs_get_settings_key_for_terminal_command (void);
+const char *meta_prefs_get_terminal_command(void);
+const char *meta_prefs_get_settings_key_for_terminal_command(void);
 
-void                        meta_prefs_get_button_layout (MetaButtonLayout *button_layout);
+void meta_prefs_get_button_layout(MetaButtonLayout *button_layout);
 
 /* Double, right, middle click can be configured to any titlebar meta-action */
-MetaActionTitlebar          meta_prefs_get_action_double_click_titlebar (void);
-MetaActionTitlebar          meta_prefs_get_action_middle_click_titlebar (void);
-MetaActionTitlebar          meta_prefs_get_action_right_click_titlebar (void);
+MetaActionTitlebar meta_prefs_get_action_double_click_titlebar(void);
+MetaActionTitlebar meta_prefs_get_action_middle_click_titlebar(void);
+MetaActionTitlebar meta_prefs_get_action_right_click_titlebar(void);
 
-MetaPlacementMode           meta_prefs_get_placement_mode (void);
+MetaPlacementMode meta_prefs_get_placement_mode(void);
 
-void meta_prefs_set_num_workspaces (int n_workspaces);
+void meta_prefs_set_num_workspaces(int n_workspaces);
 
-const char* meta_prefs_get_workspace_name    (int         i);
-void        meta_prefs_change_workspace_name (int         i,
-                                              const char *name);
+const char *meta_prefs_get_workspace_name(int i);
+void meta_prefs_change_workspace_name(int i, const char *name);
 
-const char* meta_prefs_get_cursor_theme      (void);
-int         meta_prefs_get_cursor_size       (void);
-int         meta_prefs_get_icon_size         (void);
-int         meta_prefs_get_alt_tab_max_columns (void);
-gboolean    meta_prefs_get_alt_tab_expand_to_fit_title (void);
-gboolean    meta_prefs_get_compositing_manager (void);
-gboolean    meta_prefs_get_compositing_fast_alt_tab (void);
-gboolean    meta_prefs_get_center_new_windows  (void);
-gboolean    meta_prefs_get_force_fullscreen  (void);
-gboolean    meta_prefs_show_tab_border (void);
-gboolean    meta_prefs_is_in_skip_list (char *class);
+const char *meta_prefs_get_cursor_theme(void);
+int meta_prefs_get_cursor_size(void);
+int meta_prefs_get_icon_size(void);
+int meta_prefs_get_alt_tab_max_columns(void);
+gboolean meta_prefs_get_alt_tab_expand_to_fit_title(void);
+gboolean meta_prefs_get_compositing_manager(void);
+gboolean meta_prefs_get_compositing_fast_alt_tab(void);
+gboolean meta_prefs_get_center_new_windows(void);
+gboolean meta_prefs_get_force_fullscreen(void);
+gboolean meta_prefs_show_tab_border(void);
+gboolean meta_prefs_is_in_skip_list(char *class);
 
 /**
  * Sets whether the compositor is turned on.
  *
  * \param whether   TRUE to turn on, FALSE to turn off
  */
-void meta_prefs_set_force_compositing_manager (gboolean whether);
+void meta_prefs_set_force_compositing_manager(gboolean whether);
 
-void meta_prefs_set_compositing_fast_alt_tab (gboolean whether);
+void meta_prefs_set_compositing_fast_alt_tab(gboolean whether);
 
-void meta_prefs_set_center_new_windows (gboolean whether);
+void meta_prefs_set_center_new_windows(gboolean whether);
 
-void meta_prefs_set_force_fullscreen (gboolean whether);
+void meta_prefs_set_force_fullscreen(gboolean whether);
 
 /* XXX FIXME This should be x-macroed, but isn't yet because it would be
  * difficult (or perhaps impossible) to add the suffixes using the current
  * system.  It needs some more thought, perhaps after the current system
  * evolves a little.
  */
-typedef enum _MetaKeyBindingAction
-{
+typedef enum _MetaKeyBindingAction {
   META_KEYBINDING_ACTION_NONE = -1,
   META_KEYBINDING_ACTION_WORKSPACE_1,
   META_KEYBINDING_ACTION_WORKSPACE_2,
@@ -216,16 +211,14 @@ typedef enum _MetaKeyBindingAction
   META_KEYBINDING_ACTION_COMMAND_12
 } MetaKeyBindingAction;
 
-typedef struct
-{
+typedef struct {
   unsigned int keysym;
   unsigned int keycode;
   MetaVirtualModifier modifiers;
 } MetaKeyCombo;
 
-typedef struct
-{
-  const char   *name;
+typedef struct {
+  const char *name;
   /**
    * A list of MetaKeyCombos. Each of them is bound to
    * this keypref. If one has keysym==modifiers==0, it is
@@ -236,32 +229,28 @@ typedef struct
   GSList *bindings;
 
   /** for keybindings that can have shift or not like Alt+Tab */
-  gboolean      add_shift:1;
+  gboolean add_shift : 1;
 
   /** for keybindings that apply only to a window */
-  gboolean      per_window:1;
+  gboolean per_window : 1;
 } MetaKeyPref;
 
-void meta_prefs_get_key_bindings (const MetaKeyPref **bindings,
-                                  int                *n_bindings);
+void meta_prefs_get_key_bindings(const MetaKeyPref **bindings, int *n_bindings);
 
-MetaKeyBindingAction meta_prefs_get_keybinding_action (const char *name);
+MetaKeyBindingAction meta_prefs_get_keybinding_action(const char *name);
 
-void meta_prefs_get_window_binding (const char          *name,
-                                    unsigned int        *keysym,
-                                    MetaVirtualModifier *modifiers);
+void meta_prefs_get_window_binding(const char *name, unsigned int *keysym,
+                                   MetaVirtualModifier *modifiers);
 
-typedef enum
-{
+typedef enum {
   META_VISUAL_BELL_INVALID = 0,
   META_VISUAL_BELL_FULLSCREEN_FLASH,
   META_VISUAL_BELL_FRAME_FLASH
 
 } MetaVisualBellType;
 
-gboolean           meta_prefs_get_visual_bell      (void);
-gboolean           meta_prefs_bell_is_audible      (void);
-MetaVisualBellType meta_prefs_get_visual_bell_type (void);
+gboolean meta_prefs_get_visual_bell(void);
+gboolean meta_prefs_bell_is_audible(void);
+MetaVisualBellType meta_prefs_get_visual_bell_type(void);
 
 #endif
-

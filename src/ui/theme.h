@@ -24,10 +24,11 @@
 #ifndef META_THEME_H
 #define META_THEME_H
 
-#include "boxes.h"
-#include "gradient.h"
-#include "common.h"
 #include <gtk/gtk.h>
+
+#include "boxes.h"
+#include "common.h"
+#include "gradient.h"
 
 typedef struct _MetaFrameStyle MetaFrameStyle;
 typedef struct _MetaFrameStyleSet MetaFrameStyleSet;
@@ -43,10 +44,9 @@ typedef struct _MetaTheme MetaTheme;
 typedef struct _MetaPositionExprEnv MetaPositionExprEnv;
 typedef struct _MetaDrawInfo MetaDrawInfo;
 
-#define META_THEME_ERROR (g_quark_from_static_string ("meta-theme-error"))
+#define META_THEME_ERROR (g_quark_from_static_string("meta-theme-error"))
 
-typedef enum
-{
+typedef enum {
   META_THEME_ERROR_FRAME_GEOMETRY,
   META_THEME_ERROR_BAD_CHARACTER,
   META_THEME_ERROR_BAD_PARENS,
@@ -63,8 +63,7 @@ typedef enum
  * \bug This could be done away with; see the comment at the top of
  * MetaFrameLayout.
  */
-typedef enum
-{
+typedef enum {
   META_BUTTON_SIZING_ASPECT,
   META_BUTTON_SIZING_FIXED,
   META_BUTTON_SIZING_LAST
@@ -80,8 +79,7 @@ typedef enum
  * This would also mean that MetaButtonSizing didn't need to exist, and
  * save code.
  **/
-struct _MetaFrameLayout
-{
+struct _MetaFrameLayout {
   /** Reference count. */
   int refcount;
 
@@ -158,8 +156,7 @@ struct _MetaFrameLayout
  * The reason for two different rectangles here is Fitts' law & maximized
  * windows; see bug #97703 for more details.
  */
-struct _MetaButtonSpace
-{
+struct _MetaButtonSpace {
   /** The screen area where the button's image is drawn */
   GdkRectangle visible;
   /** The screen area where the button can be activated by clicking */
@@ -169,8 +166,7 @@ struct _MetaButtonSpace
 /**
  * Calculated actual geometry of the frame
  */
-struct _MetaFrameGeometry
-{
+struct _MetaFrameGeometry {
   MetaFrameBorders borders;
 
   int width;
@@ -184,8 +180,11 @@ struct _MetaFrameGeometry
   int bottom_titlebar_edge;
 
   /* used for a memset hack */
-#define ADDRESS_OF_BUTTON_RECTS(fgeom) (((char*)(fgeom)) + G_STRUCT_OFFSET (MetaFrameGeometry, close_rect))
-#define LENGTH_OF_BUTTON_RECTS (G_STRUCT_OFFSET (MetaFrameGeometry, right_single_background) + sizeof (GdkRectangle) - G_STRUCT_OFFSET (MetaFrameGeometry, close_rect))
+#define ADDRESS_OF_BUTTON_RECTS(fgeom) \
+  (((char *)(fgeom)) + G_STRUCT_OFFSET(MetaFrameGeometry, close_rect))
+#define LENGTH_OF_BUTTON_RECTS                                   \
+  (G_STRUCT_OFFSET(MetaFrameGeometry, right_single_background) + \
+   sizeof(GdkRectangle) - G_STRUCT_OFFSET(MetaFrameGeometry, close_rect))
 
   /* The button rects (if changed adjust memset hack) */
   MetaButtonSpace close_rect;
@@ -223,14 +222,12 @@ struct _MetaFrameGeometry
   guint bottom_right_corner_rounded_radius;
 };
 
-typedef enum
-{
+typedef enum {
   META_IMAGE_FILL_SCALE, /* default, needs to be all-bits-zero for g_new0 */
   META_IMAGE_FILL_TILE
 } MetaImageFillType;
 
-typedef enum
-{
+typedef enum {
   META_COLOR_SPEC_BASIC,
   META_COLOR_SPEC_GTK,
   META_COLOR_SPEC_GTK_CUSTOM,
@@ -238,8 +235,7 @@ typedef enum
   META_COLOR_SPEC_SHADE
 } MetaColorSpecType;
 
-typedef enum
-{
+typedef enum {
   META_GTK_COLOR_FG,
   META_GTK_COLOR_BG,
   META_GTK_COLOR_LIGHT,
@@ -251,11 +247,9 @@ typedef enum
   META_GTK_COLOR_LAST
 } MetaGtkColorComponent;
 
-struct _MetaColorSpec
-{
+struct _MetaColorSpec {
   MetaColorSpecType type;
-  union
-  {
+  union {
     struct {
       GdkRGBA color;
     } basic;
@@ -281,23 +275,20 @@ struct _MetaColorSpec
   } data;
 };
 
-struct _MetaGradientSpec
-{
+struct _MetaGradientSpec {
   MetaGradientType type;
   GSList *color_specs;
 };
 
-struct _MetaAlphaGradientSpec
-{
+struct _MetaAlphaGradientSpec {
   MetaGradientType type;
   unsigned char *alphas;
   int n_alphas;
 };
 
-struct _MetaDrawInfo
-{
-  GdkPixbuf   *mini_icon;
-  GdkPixbuf   *icon;
+struct _MetaDrawInfo {
+  GdkPixbuf *mini_icon;
+  GdkPixbuf *icon;
   PangoLayout *title_layout;
   int title_layout_width;
   int title_layout_height;
@@ -307,8 +298,7 @@ struct _MetaDrawInfo
 /**
  * A drawing operation in our simple vector drawing language.
  */
-typedef enum
-{
+typedef enum {
   /** Basic drawing-- line */
   META_DRAW_LINE,
   /** Basic drawing-- rectangle */
@@ -341,8 +331,7 @@ typedef enum
   META_DRAW_TILE
 } MetaDrawType;
 
-typedef enum
-{
+typedef enum {
   POS_TOKEN_INT,
   POS_TOKEN_DOUBLE,
   POS_TOKEN_OPERATOR,
@@ -351,8 +340,7 @@ typedef enum
   POS_TOKEN_CLOSE_PAREN
 } PosTokenType;
 
-typedef enum
-{
+typedef enum {
   POS_OP_NONE,
   POS_OP_ADD,
   POS_OP_SUBTRACT,
@@ -368,12 +356,10 @@ typedef enum
  *
  * \ingroup tokenizer
  */
-typedef struct
-{
+typedef struct {
   PosTokenType type;
 
-  union
-  {
+  union {
     struct {
       int val;
     } i;
@@ -404,8 +390,7 @@ typedef struct
  * pos_eval() fills this with ...FIXME. Are tokens a tree or a list?
  * \ingroup parser
  */
-typedef struct _MetaDrawSpec
-{
+typedef struct _MetaDrawSpec {
   /**
    * If this spec is constant, this is the value of the constant;
    * otherwise it is zero.
@@ -425,13 +410,11 @@ typedef struct _MetaDrawSpec
 /**
  * A single drawing operation in our simple vector drawing language.
  */
-struct _MetaDrawOp
-{
+struct _MetaDrawOp {
   MetaDrawType type;
 
   /* Positions are strings because they can be expressions */
-  union
-  {
+  union {
     struct {
       MetaColorSpec *color_spec;
       int dash_on_length;
@@ -579,24 +562,21 @@ struct _MetaDrawOp
  * \bug Do we really win anything from not using the equivalent
  * GLib structures?
  */
-struct _MetaDrawOpList
-{
+struct _MetaDrawOpList {
   int refcount;
   MetaDrawOp **ops;
   int n_ops;
   int n_allocated;
 };
 
-typedef enum
-{
+typedef enum {
   META_BUTTON_STATE_NORMAL,
   META_BUTTON_STATE_PRESSED,
   META_BUTTON_STATE_PRELIGHT,
   META_BUTTON_STATE_LAST
 } MetaButtonState;
 
-typedef enum
-{
+typedef enum {
   /* Ordered so that background is drawn first */
   META_BUTTON_TYPE_LEFT_LEFT_BACKGROUND,
   META_BUTTON_TYPE_LEFT_MIDDLE_BACKGROUND,
@@ -620,8 +600,7 @@ typedef enum
   META_BUTTON_TYPE_LAST
 } MetaButtonType;
 
-typedef enum
-{
+typedef enum {
   META_MENU_ICON_TYPE_CLOSE,
   META_MENU_ICON_TYPE_MAXIMIZE,
   META_MENU_ICON_TYPE_UNMAXIMIZE,
@@ -629,8 +608,7 @@ typedef enum
   META_MENU_ICON_TYPE_LAST
 } MetaMenuIconType;
 
-typedef enum
-{
+typedef enum {
   /* Listed in the order in which the textures are drawn.
    * (though this only matters for overlaps of course.)
    * Buttons are drawn after the frame textures.
@@ -679,8 +657,7 @@ typedef enum
  * resizable frame). This corresponds closely to the <frame_style> tag
  * in a theme file.
  */
-struct _MetaFrameStyle
-{
+struct _MetaFrameStyle {
   /** Reference count. */
   int refcount;
   /**
@@ -723,8 +700,7 @@ struct _MetaFrameStyle
  * window types never get a frame so that narrows it down a bit.
  *
  */
-typedef enum
-{
+typedef enum {
   META_FRAME_STATE_NORMAL,
   META_FRAME_STATE_MAXIMIZED,
   META_FRAME_STATE_TILED_LEFT,
@@ -736,8 +712,7 @@ typedef enum
   META_FRAME_STATE_LAST
 } MetaFrameState;
 
-typedef enum
-{
+typedef enum {
   META_FRAME_RESIZE_NONE,
   META_FRAME_RESIZE_VERTICAL,
   META_FRAME_RESIZE_HORIZONTAL,
@@ -745,8 +720,7 @@ typedef enum
   META_FRAME_RESIZE_LAST
 } MetaFrameResize;
 
-typedef enum
-{
+typedef enum {
   META_FRAME_FOCUS_NO,
   META_FRAME_FOCUS_YES,
   META_FRAME_FOCUS_LAST
@@ -763,8 +737,7 @@ typedef enum
  *
  * This corresponds closely to the <frame_style_set> tag in a theme file.
  */
-struct _MetaFrameStyleSet
-{
+struct _MetaFrameStyleSet {
   int refcount;
   MetaFrameStyleSet *parent;
   MetaFrameStyle *normal_styles[META_FRAME_RESIZE_LAST][META_FRAME_FOCUS_LAST];
@@ -783,8 +756,7 @@ struct _MetaFrameStyleSet
  *
  * \bug It is rather useless to keep the metadata fields in core, I think.
  */
-struct _MetaTheme
-{
+struct _MetaTheme {
   /** Name of the theme (on disk), e.g. "Crux" */
   char *name;
   /** Path to the files associated with the theme */
@@ -844,8 +816,7 @@ struct _MetaTheme
   GQuark quark_frame_y_center;
 };
 
-struct _MetaPositionExprEnv
-{
+struct _MetaPositionExprEnv {
   MetaRectangle rect;
   /* size of an object being drawn, if it has a natural size */
   int object_width;
@@ -867,298 +838,224 @@ struct _MetaPositionExprEnv
   MetaTheme *theme;
 };
 
-MetaFrameLayout* meta_frame_layout_new           (void);
-MetaFrameLayout* meta_frame_layout_copy          (const MetaFrameLayout *src);
-void             meta_frame_layout_ref           (MetaFrameLayout       *layout);
-void             meta_frame_layout_unref         (MetaFrameLayout       *layout);
-void             meta_frame_layout_get_borders   (const MetaFrameLayout *layout,
-                                                  int                    text_height,
-                                                  MetaFrameFlags         flags,
-                                                  MetaFrameBorders      *borders);
-void             meta_frame_layout_calc_geometry (const MetaFrameLayout  *layout,
-                                                  int                     text_height,
-                                                  MetaFrameFlags          flags,
-                                                  int                     client_width,
-                                                  int                     client_height,
-                                                  const MetaButtonLayout *button_layout,
-                                                  MetaFrameGeometry      *fgeom,
-                                                  MetaTheme              *theme);
+MetaFrameLayout *meta_frame_layout_new(void);
+MetaFrameLayout *meta_frame_layout_copy(const MetaFrameLayout *src);
+void meta_frame_layout_ref(MetaFrameLayout *layout);
+void meta_frame_layout_unref(MetaFrameLayout *layout);
+void meta_frame_layout_get_borders(const MetaFrameLayout *layout,
+                                   int text_height, MetaFrameFlags flags,
+                                   MetaFrameBorders *borders);
+void meta_frame_layout_calc_geometry(const MetaFrameLayout *layout,
+                                     int text_height, MetaFrameFlags flags,
+                                     int client_width, int client_height,
+                                     const MetaButtonLayout *button_layout,
+                                     MetaFrameGeometry *fgeom,
+                                     MetaTheme *theme);
 
-gboolean         meta_frame_layout_validate      (const MetaFrameLayout *layout,
-                                                  GError               **error);
+gboolean meta_frame_layout_validate(const MetaFrameLayout *layout,
+                                    GError **error);
 
-gboolean meta_parse_position_expression (MetaDrawSpec               *spec,
-                                         const MetaPositionExprEnv  *env,
-                                         int                        *x_return,
-                                         int                        *y_return,
-                                         GError                    **err);
-gboolean meta_parse_size_expression     (MetaDrawSpec               *spec,
-                                         const MetaPositionExprEnv  *env,
-                                         int                        *val_return,
-                                         GError                    **err);
+gboolean meta_parse_position_expression(MetaDrawSpec *spec,
+                                        const MetaPositionExprEnv *env,
+                                        int *x_return, int *y_return,
+                                        GError **err);
+gboolean meta_parse_size_expression(MetaDrawSpec *spec,
+                                    const MetaPositionExprEnv *env,
+                                    int *val_return, GError **err);
 
-MetaDrawSpec* meta_draw_spec_new (MetaTheme  *theme,
-                                  const char *expr,
-                                  GError    **error);
-void          meta_draw_spec_free (MetaDrawSpec *spec);
+MetaDrawSpec *meta_draw_spec_new(MetaTheme *theme, const char *expr,
+                                 GError **error);
+void meta_draw_spec_free(MetaDrawSpec *spec);
 
-MetaColorSpec* meta_color_spec_new             (MetaColorSpecType  type);
-MetaColorSpec* meta_color_spec_new_from_string (const char        *str,
-                                                GError           **err);
-MetaColorSpec* meta_color_spec_new_gtk         (MetaGtkColorComponent component,
-                                                GtkStateFlags         state);
-void           meta_color_spec_free            (MetaColorSpec     *spec);
-void           meta_color_spec_render          (MetaColorSpec     *spec,
-                                                GtkStyleContext   *style_gtk,
-                                                GdkRGBA           *color);
+MetaColorSpec *meta_color_spec_new(MetaColorSpecType type);
+MetaColorSpec *meta_color_spec_new_from_string(const char *str, GError **err);
+MetaColorSpec *meta_color_spec_new_gtk(MetaGtkColorComponent component,
+                                       GtkStateFlags state);
+void meta_color_spec_free(MetaColorSpec *spec);
+void meta_color_spec_render(MetaColorSpec *spec, GtkStyleContext *style_gtk,
+                            GdkRGBA *color);
 
-MetaDrawOp*    meta_draw_op_new  (MetaDrawType        type);
-void           meta_draw_op_free (MetaDrawOp          *op);
-void           meta_draw_op_draw (const MetaDrawOp    *op,
-                                  GtkWidget           *widget,
-                                  cairo_t             *cr,
-                                  const MetaDrawInfo  *info,
+MetaDrawOp *meta_draw_op_new(MetaDrawType type);
+void meta_draw_op_free(MetaDrawOp *op);
+void meta_draw_op_draw(const MetaDrawOp *op, GtkWidget *widget, cairo_t *cr,
+                       const MetaDrawInfo *info,
+                       /* logical region being drawn */
+                       MetaRectangle logical_region);
+
+void meta_draw_op_draw_with_style(const MetaDrawOp *op,
+                                  GtkStyleContext *style_gtk, cairo_t *cr,
+                                  const MetaDrawInfo *info,
                                   /* logical region being drawn */
-                                  MetaRectangle        logical_region);
+                                  MetaRectangle logical_region);
 
-void           meta_draw_op_draw_with_style (const MetaDrawOp    *op,
-                                             GtkStyleContext     *style_gtk,
-                                             cairo_t             *cr,
-                                             const MetaDrawInfo  *info,
-                                             /* logical region being drawn */
-                                             MetaRectangle        logical_region);
+MetaDrawOpList *meta_draw_op_list_new(int n_preallocs);
+void meta_draw_op_list_ref(MetaDrawOpList *op_list);
+void meta_draw_op_list_unref(MetaDrawOpList *op_list);
+void meta_draw_op_list_draw(const MetaDrawOpList *op_list, GtkWidget *widget,
+                            cairo_t *cr, const MetaDrawInfo *info,
+                            MetaRectangle rect);
+void meta_draw_op_list_draw_with_style(const MetaDrawOpList *op_list,
+                                       GtkStyleContext *style_gtk, cairo_t *cr,
+                                       const MetaDrawInfo *info,
+                                       MetaRectangle rect);
+void meta_draw_op_list_append(MetaDrawOpList *op_list, MetaDrawOp *op);
+gboolean meta_draw_op_list_validate(MetaDrawOpList *op_list, GError **error);
+gboolean meta_draw_op_list_contains(MetaDrawOpList *op_list,
+                                    MetaDrawOpList *child);
 
-MetaDrawOpList* meta_draw_op_list_new   (int                   n_preallocs);
-void            meta_draw_op_list_ref   (MetaDrawOpList       *op_list);
-void            meta_draw_op_list_unref (MetaDrawOpList       *op_list);
-void            meta_draw_op_list_draw  (const MetaDrawOpList *op_list,
-                                         GtkWidget            *widget,
-                                         cairo_t              *cr,
-                                         const MetaDrawInfo   *info,
-                                         MetaRectangle         rect);
-void            meta_draw_op_list_draw_with_style  (const MetaDrawOpList *op_list,
-                                                    GtkStyleContext      *style_gtk,
-                                                    cairo_t              *cr,
-                                                    const MetaDrawInfo   *info,
-                                                    MetaRectangle         rect);
-void           meta_draw_op_list_append (MetaDrawOpList       *op_list,
-                                         MetaDrawOp           *op);
-gboolean       meta_draw_op_list_validate (MetaDrawOpList    *op_list,
-                                           GError           **error);
-gboolean       meta_draw_op_list_contains (MetaDrawOpList    *op_list,
-                                           MetaDrawOpList    *child);
+MetaGradientSpec *meta_gradient_spec_new(MetaGradientType type);
+void meta_gradient_spec_free(MetaGradientSpec *desc);
+void meta_gradient_spec_render(const MetaGradientSpec *spec,
+                               const MetaAlphaGradientSpec *alpha_spec,
+                               cairo_t *cr, GtkStyleContext *context, gint x,
+                               gint y, gint width, gint height);
+gboolean meta_gradient_spec_validate(MetaGradientSpec *spec, GError **error);
 
-MetaGradientSpec* meta_gradient_spec_new    (MetaGradientType        type);
-void              meta_gradient_spec_free   (MetaGradientSpec       *desc);
-void              meta_gradient_spec_render (const MetaGradientSpec      *spec,
-                                             const MetaAlphaGradientSpec *alpha_spec,
-                                             cairo_t                     *cr,
-                                             GtkStyleContext             *context,
-                                             gint                         x,
-                                             gint                         y,
-                                             gint                         width,
-                                             gint                         height);
-gboolean          meta_gradient_spec_validate (MetaGradientSpec     *spec,
-                                               GError              **error);
+MetaAlphaGradientSpec *meta_alpha_gradient_spec_new(MetaGradientType type,
+                                                    int n_alphas);
+void meta_alpha_gradient_spec_free(MetaAlphaGradientSpec *spec);
+cairo_pattern_t *meta_alpha_gradient_spec_get_mask(
+    const MetaAlphaGradientSpec *spec);
 
-MetaAlphaGradientSpec* meta_alpha_gradient_spec_new  (MetaGradientType       type,
-                                                      int                    n_alphas);
-void                   meta_alpha_gradient_spec_free (MetaAlphaGradientSpec *spec);
-cairo_pattern_t *      meta_alpha_gradient_spec_get_mask (const MetaAlphaGradientSpec *spec);
+MetaFrameStyle *meta_frame_style_new(MetaFrameStyle *parent);
+void meta_frame_style_ref(MetaFrameStyle *style);
+void meta_frame_style_unref(MetaFrameStyle *style);
 
-MetaFrameStyle* meta_frame_style_new   (MetaFrameStyle *parent);
-void            meta_frame_style_ref   (MetaFrameStyle *style);
-void            meta_frame_style_unref (MetaFrameStyle *style);
+void meta_frame_style_draw(MetaFrameStyle *style, GtkWidget *widget,
+                           cairo_t *cr, const MetaFrameGeometry *fgeom,
+                           int client_width, int client_height,
+                           PangoLayout *title_layout, int text_height,
+                           MetaButtonState button_states[META_BUTTON_TYPE_LAST],
+                           GdkPixbuf *mini_icon, GdkPixbuf *icon);
 
-void meta_frame_style_draw (MetaFrameStyle          *style,
-                            GtkWidget               *widget,
-                            cairo_t                 *cr,
-                            const MetaFrameGeometry *fgeom,
-                            int                      client_width,
-                            int                      client_height,
-                            PangoLayout             *title_layout,
-                            int                      text_height,
-                            MetaButtonState          button_states[META_BUTTON_TYPE_LAST],
-                            GdkPixbuf               *mini_icon,
-                            GdkPixbuf               *icon);
+void meta_frame_style_draw_with_style(
+    MetaFrameStyle *style, GtkStyleContext *style_gtk, cairo_t *cr,
+    const MetaFrameGeometry *fgeom, int client_width, int client_height,
+    PangoLayout *title_layout, int text_height,
+    MetaButtonState button_states[META_BUTTON_TYPE_LAST], GdkPixbuf *mini_icon,
+    GdkPixbuf *icon);
 
-void meta_frame_style_draw_with_style (MetaFrameStyle          *style,
-                                       GtkStyleContext         *style_gtk,
-                                       cairo_t                 *cr,
-                                       const MetaFrameGeometry *fgeom,
-                                       int                      client_width,
-                                       int                      client_height,
-                                       PangoLayout             *title_layout,
-                                       int                      text_height,
-                                       MetaButtonState          button_states[META_BUTTON_TYPE_LAST],
-                                       GdkPixbuf               *mini_icon,
-                                       GdkPixbuf               *icon);
+gboolean meta_frame_style_validate(MetaFrameStyle *style,
+                                   guint current_theme_version, GError **error);
 
-gboolean       meta_frame_style_validate (MetaFrameStyle    *style,
-                                          guint              current_theme_version,
-                                          GError           **error);
+MetaFrameStyleSet *meta_frame_style_set_new(MetaFrameStyleSet *parent);
+void meta_frame_style_set_ref(MetaFrameStyleSet *style_set);
+void meta_frame_style_set_unref(MetaFrameStyleSet *style_set);
 
-MetaFrameStyleSet* meta_frame_style_set_new   (MetaFrameStyleSet *parent);
-void               meta_frame_style_set_ref   (MetaFrameStyleSet *style_set);
-void               meta_frame_style_set_unref (MetaFrameStyleSet *style_set);
+gboolean meta_frame_style_set_validate(MetaFrameStyleSet *style_set,
+                                       GError **error);
 
-gboolean       meta_frame_style_set_validate  (MetaFrameStyleSet *style_set,
-                                               GError           **error);
+MetaTheme *meta_theme_get_current(void);
+void meta_theme_set_current(const char *name, gboolean force_reload);
 
-MetaTheme* meta_theme_get_current (void);
-void       meta_theme_set_current (const char *name,
-                                   gboolean    force_reload);
+MetaTheme *meta_theme_new(void);
+void meta_theme_free(MetaTheme *theme);
+gboolean meta_theme_validate(MetaTheme *theme, GError **error);
+GdkPixbuf *meta_theme_load_image(MetaTheme *theme, const char *filename,
+                                 guint size_of_theme_icons, GError **error);
 
-MetaTheme* meta_theme_new      (void);
-void       meta_theme_free     (MetaTheme *theme);
-gboolean   meta_theme_validate (MetaTheme *theme,
-                                GError   **error);
-GdkPixbuf* meta_theme_load_image (MetaTheme  *theme,
-                                  const char *filename,
-                                  guint       size_of_theme_icons,
-                                  GError    **error);
+MetaFrameStyle *meta_theme_get_frame_style(MetaTheme *theme, MetaFrameType type,
+                                           MetaFrameFlags flags);
 
-MetaFrameStyle* meta_theme_get_frame_style (MetaTheme     *theme,
-                                            MetaFrameType  type,
-                                            MetaFrameFlags flags);
+double meta_theme_get_title_scale(MetaTheme *theme, MetaFrameType type,
+                                  MetaFrameFlags flags);
 
-double meta_theme_get_title_scale (MetaTheme     *theme,
-                                   MetaFrameType  type,
-                                   MetaFrameFlags flags);
+void meta_theme_draw_frame(MetaTheme *theme, GtkStyleContext *style_gtk,
+                           cairo_t *cr, MetaFrameType type,
+                           MetaFrameFlags flags, int client_width,
+                           int client_height, PangoLayout *title_layout,
+                           int text_height,
+                           const MetaButtonLayout *button_layout,
+                           MetaButtonState button_states[META_BUTTON_TYPE_LAST],
+                           GdkPixbuf *mini_icon, GdkPixbuf *icon);
 
-void meta_theme_draw_frame (MetaTheme              *theme,
-                            GtkStyleContext        *style_gtk,
-                            cairo_t                *cr,
-                            MetaFrameType           type,
-                            MetaFrameFlags          flags,
-                            int                     client_width,
-                            int                     client_height,
-                            PangoLayout            *title_layout,
-                            int                     text_height,
-                            const MetaButtonLayout *button_layout,
-                            MetaButtonState         button_states[META_BUTTON_TYPE_LAST],
-                            GdkPixbuf              *mini_icon,
-                            GdkPixbuf              *icon);
+void meta_theme_draw_frame_by_name(
+    MetaTheme *theme, GtkWidget *widget, cairo_t *cr, const gchar *style_name,
+    MetaFrameFlags flags, int client_width, int client_height,
+    PangoLayout *title_layout, int text_height,
+    const MetaButtonLayout *button_layout,
+    MetaButtonState button_states[META_BUTTON_TYPE_LAST], GdkPixbuf *mini_icon,
+    GdkPixbuf *icon);
 
-void meta_theme_draw_frame_by_name (MetaTheme              *theme,
-                                    GtkWidget              *widget,
-                                    cairo_t                *cr,
-                                    const gchar             *style_name,
-                                    MetaFrameFlags          flags,
-                                    int                     client_width,
-                                    int                     client_height,
-                                    PangoLayout            *title_layout,
-                                    int                     text_height,
-                                    const MetaButtonLayout *button_layout,
-                                    MetaButtonState         button_states[META_BUTTON_TYPE_LAST],
-                                    GdkPixbuf              *mini_icon,
-                                    GdkPixbuf              *icon);
+void meta_theme_get_frame_borders(MetaTheme *theme, MetaFrameType type,
+                                  int text_height, MetaFrameFlags flags,
+                                  MetaFrameBorders *borders);
+void meta_theme_calc_geometry(MetaTheme *theme, MetaFrameType type,
+                              int text_height, MetaFrameFlags flags,
+                              int client_width, int client_height,
+                              const MetaButtonLayout *button_layout,
+                              MetaFrameGeometry *fgeom);
 
-void meta_theme_get_frame_borders (MetaTheme         *theme,
-                                   MetaFrameType      type,
-                                   int                text_height,
-                                   MetaFrameFlags     flags,
-                                   MetaFrameBorders  *borders);
-void meta_theme_calc_geometry (MetaTheme              *theme,
-                               MetaFrameType           type,
-                               int                     text_height,
-                               MetaFrameFlags          flags,
-                               int                     client_width,
-                               int                     client_height,
-                               const MetaButtonLayout *button_layout,
-                               MetaFrameGeometry      *fgeom);
+MetaFrameLayout *meta_theme_lookup_layout(MetaTheme *theme, const char *name);
+void meta_theme_insert_layout(MetaTheme *theme, const char *name,
+                              MetaFrameLayout *layout);
+MetaDrawOpList *meta_theme_lookup_draw_op_list(MetaTheme *theme,
+                                               const char *name);
+void meta_theme_insert_draw_op_list(MetaTheme *theme, const char *name,
+                                    MetaDrawOpList *op_list);
+MetaFrameStyle *meta_theme_lookup_style(MetaTheme *theme, const char *name);
+void meta_theme_insert_style(MetaTheme *theme, const char *name,
+                             MetaFrameStyle *style);
+MetaFrameStyleSet *meta_theme_lookup_style_set(MetaTheme *theme,
+                                               const char *name);
+void meta_theme_insert_style_set(MetaTheme *theme, const char *name,
+                                 MetaFrameStyleSet *style_set);
+gboolean meta_theme_define_int_constant(MetaTheme *theme, const char *name,
+                                        int value, GError **error);
+gboolean meta_theme_lookup_int_constant(MetaTheme *theme, const char *name,
+                                        int *value);
+gboolean meta_theme_define_float_constant(MetaTheme *theme, const char *name,
+                                          double value, GError **error);
+gboolean meta_theme_lookup_float_constant(MetaTheme *theme, const char *name,
+                                          double *value);
 
-MetaFrameLayout*   meta_theme_lookup_layout       (MetaTheme         *theme,
-                                                   const char        *name);
-void               meta_theme_insert_layout       (MetaTheme         *theme,
-                                                   const char        *name,
-                                                   MetaFrameLayout   *layout);
-MetaDrawOpList*    meta_theme_lookup_draw_op_list (MetaTheme         *theme,
-                                                   const char        *name);
-void               meta_theme_insert_draw_op_list (MetaTheme         *theme,
-                                                   const char        *name,
-                                                   MetaDrawOpList    *op_list);
-MetaFrameStyle*    meta_theme_lookup_style        (MetaTheme         *theme,
-                                                   const char        *name);
-void               meta_theme_insert_style        (MetaTheme         *theme,
-                                                   const char        *name,
-                                                   MetaFrameStyle    *style);
-MetaFrameStyleSet* meta_theme_lookup_style_set    (MetaTheme         *theme,
-                                                   const char        *name);
-void               meta_theme_insert_style_set    (MetaTheme         *theme,
-                                                   const char        *name,
-                                                   MetaFrameStyleSet *style_set);
-gboolean meta_theme_define_int_constant   (MetaTheme   *theme,
-                                           const char  *name,
-                                           int          value,
-                                           GError     **error);
-gboolean meta_theme_lookup_int_constant   (MetaTheme   *theme,
-                                           const char  *name,
-                                           int         *value);
-gboolean meta_theme_define_float_constant (MetaTheme   *theme,
-                                           const char  *name,
-                                           double       value,
-                                           GError     **error);
-gboolean meta_theme_lookup_float_constant (MetaTheme   *theme,
-                                           const char  *name,
-                                           double      *value);
+gboolean meta_theme_define_color_constant(MetaTheme *theme, const char *name,
+                                          const char *value, GError **error);
+gboolean meta_theme_lookup_color_constant(MetaTheme *theme, const char *name,
+                                          char **value);
 
-gboolean meta_theme_define_color_constant (MetaTheme   *theme,
-                                           const char  *name,
-                                           const char  *value,
-                                           GError     **error);
-gboolean meta_theme_lookup_color_constant (MetaTheme   *theme,
-                                           const char  *name,
-                                           char       **value);
-
-gboolean     meta_theme_replace_constants     (MetaTheme    *theme,
-                                               PosToken     *tokens,
-                                               int           n_tokens,
-                                               GError      **err);
+gboolean meta_theme_replace_constants(MetaTheme *theme, PosToken *tokens,
+                                      int n_tokens, GError **err);
 
 /* random stuff */
 
-PangoFontDescription* meta_gtk_widget_get_font_desc        (GtkWidget            *widget,
-                                                            double                scale,
-							    const PangoFontDescription *override);
-int                   meta_pango_font_desc_get_text_height (const PangoFontDescription *font_desc,
-                                                            PangoContext         *context);
+PangoFontDescription *meta_gtk_widget_get_font_desc(
+    GtkWidget *widget, double scale, const PangoFontDescription *override);
+int meta_pango_font_desc_get_text_height(const PangoFontDescription *font_desc,
+                                         PangoContext *context);
 
 /* Enum converters */
-MetaGtkColorComponent meta_color_component_from_string (const char            *str);
-const char*           meta_color_component_to_string   (MetaGtkColorComponent  component);
-MetaButtonState       meta_button_state_from_string    (const char            *str);
-const char*           meta_button_state_to_string      (MetaButtonState        state);
-MetaButtonType        meta_button_type_from_string     (const char            *str,
-                                                        MetaTheme             *theme);
-const char*           meta_button_type_to_string       (MetaButtonType         type);
-MetaFramePiece        meta_frame_piece_from_string     (const char            *str);
-const char*           meta_frame_piece_to_string       (MetaFramePiece         piece);
-MetaFrameState        meta_frame_state_from_string     (const char            *str);
-const char*           meta_frame_state_to_string       (MetaFrameState         state);
-MetaFrameResize       meta_frame_resize_from_string    (const char            *str);
-const char*           meta_frame_resize_to_string      (MetaFrameResize        resize);
-MetaFrameFocus        meta_frame_focus_from_string     (const char            *str);
-const char*           meta_frame_focus_to_string       (MetaFrameFocus         focus);
-MetaFrameType         meta_frame_type_from_string      (const char            *str);
-const char*           meta_frame_type_to_string        (MetaFrameType          type);
-MetaGradientType      meta_gradient_type_from_string   (const char            *str);
-const char*           meta_gradient_type_to_string     (MetaGradientType       type);
-GtkStateFlags         meta_gtk_state_from_string       (const char            *str);
-GtkShadowType         meta_gtk_shadow_from_string      (const char            *str);
-const char*           meta_gtk_shadow_to_string        (GtkShadowType          shadow);
-GtkArrowType          meta_gtk_arrow_from_string       (const char            *str);
-const char*           meta_gtk_arrow_to_string         (GtkArrowType           arrow);
-MetaImageFillType     meta_image_fill_type_from_string (const char            *str);
-const char*           meta_image_fill_type_to_string   (MetaImageFillType      fill_type);
-void                  meta_gtk_style_get_light_color   (GtkStyleContext      *style,
-                                                        GtkStateFlags         state,
-                                                        GdkRGBA              *color);
-void                  meta_gtk_style_get_dark_color    (GtkStyleContext      *style,
-                                                        GtkStateFlags         state,
-                                                        GdkRGBA              *color);
+MetaGtkColorComponent meta_color_component_from_string(const char *str);
+const char *meta_color_component_to_string(MetaGtkColorComponent component);
+MetaButtonState meta_button_state_from_string(const char *str);
+const char *meta_button_state_to_string(MetaButtonState state);
+MetaButtonType meta_button_type_from_string(const char *str, MetaTheme *theme);
+const char *meta_button_type_to_string(MetaButtonType type);
+MetaFramePiece meta_frame_piece_from_string(const char *str);
+const char *meta_frame_piece_to_string(MetaFramePiece piece);
+MetaFrameState meta_frame_state_from_string(const char *str);
+const char *meta_frame_state_to_string(MetaFrameState state);
+MetaFrameResize meta_frame_resize_from_string(const char *str);
+const char *meta_frame_resize_to_string(MetaFrameResize resize);
+MetaFrameFocus meta_frame_focus_from_string(const char *str);
+const char *meta_frame_focus_to_string(MetaFrameFocus focus);
+MetaFrameType meta_frame_type_from_string(const char *str);
+const char *meta_frame_type_to_string(MetaFrameType type);
+MetaGradientType meta_gradient_type_from_string(const char *str);
+const char *meta_gradient_type_to_string(MetaGradientType type);
+GtkStateFlags meta_gtk_state_from_string(const char *str);
+GtkShadowType meta_gtk_shadow_from_string(const char *str);
+const char *meta_gtk_shadow_to_string(GtkShadowType shadow);
+GtkArrowType meta_gtk_arrow_from_string(const char *str);
+const char *meta_gtk_arrow_to_string(GtkArrowType arrow);
+MetaImageFillType meta_image_fill_type_from_string(const char *str);
+const char *meta_image_fill_type_to_string(MetaImageFillType fill_type);
+void meta_gtk_style_get_light_color(GtkStyleContext *style, GtkStateFlags state,
+                                    GdkRGBA *color);
+void meta_gtk_style_get_dark_color(GtkStyleContext *style, GtkStateFlags state,
+                                   GdkRGBA *color);
 
-guint meta_theme_earliest_version_with_button (MetaButtonType type);
+guint meta_theme_earliest_version_with_button(MetaButtonType type);
 
 #define META_THEME_ALLOWS(theme, feature) (theme->format_version >= feature)
 

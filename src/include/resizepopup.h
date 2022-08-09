@@ -25,23 +25,18 @@
 #define META_RESIZEPOPUP_H
 
 /* Don't include gtk.h or gdk.h here */
+#include <X11/Xlib.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
+#include <glib.h>
+
 #include "boxes.h"
 #include "common.h"
-#include <X11/Xlib.h>
-#include <glib.h>
-#include <gdk-pixbuf/gdk-pixbuf.h>
 
-MetaResizePopup* meta_ui_resize_popup_new          (Display *display,
-                                                    int      screen_number);
-void             meta_ui_resize_popup_free         (MetaResizePopup *popup);
-void             meta_ui_resize_popup_set (MetaResizePopup *popup,
-                                           MetaRectangle    rect,
-                                           int              base_width,
-                                           int              base_height,
-                                           int              width_inc,
-                                           int              height_inc);
-void             meta_ui_resize_popup_set_showing  (MetaResizePopup *popup,
-                                                    gboolean         showing);
+MetaResizePopup *meta_ui_resize_popup_new(Display *display, int screen_number);
+void meta_ui_resize_popup_free(MetaResizePopup *popup);
+void meta_ui_resize_popup_set(MetaResizePopup *popup, MetaRectangle rect,
+                              int base_width, int base_height, int width_inc,
+                              int height_inc);
+void meta_ui_resize_popup_set_showing(MetaResizePopup *popup, gboolean showing);
 
 #endif
-

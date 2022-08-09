@@ -24,26 +24,24 @@
 
 #include <X11/Xlib.h>
 #include <glib.h>
+
 #include "types.h"
 
-int meta_screen_get_screen_number (MetaScreen *screen);
-MetaDisplay *meta_screen_get_display (MetaScreen *screen);
+int meta_screen_get_screen_number(MetaScreen *screen);
+MetaDisplay *meta_screen_get_display(MetaScreen *screen);
 
-Window meta_screen_get_xroot (MetaScreen *screen);
-void meta_screen_get_size (MetaScreen *screen,
-                           int        *width,
-                           int        *height);
+Window meta_screen_get_xroot(MetaScreen *screen);
+void meta_screen_get_size(MetaScreen *screen, int *width, int *height);
 
-gpointer meta_screen_get_compositor_data (MetaScreen *screen);
-void meta_screen_set_compositor_data (MetaScreen *screen,
-                                      gpointer    info);
+gpointer meta_screen_get_compositor_data(MetaScreen *screen);
+void meta_screen_set_compositor_data(MetaScreen *screen, gpointer info);
 
-MetaScreen *meta_screen_for_x_screen (Screen *xscreen);
+MetaScreen *meta_screen_for_x_screen(Screen *xscreen);
 
 #ifdef HAVE_COMPOSITE_EXTENSIONS
-void meta_screen_set_cm_selection (MetaScreen *screen);
-void meta_screen_unset_cm_selection (MetaScreen *screen);
-gboolean meta_screen_is_cm_selected (MetaScreen *screen);
+void meta_screen_set_cm_selection(MetaScreen *screen);
+void meta_screen_unset_cm_selection(MetaScreen *screen);
+gboolean meta_screen_is_cm_selected(MetaScreen *screen);
 #endif
 
 #endif

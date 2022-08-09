@@ -27,10 +27,10 @@
 
 /* Don't include core headers here */
 #include <gdk/gdkx.h>
+
 #include "common.h"
 
-typedef enum
-{
+typedef enum {
   META_CORE_GET_END = 0,
   META_CORE_WINDOW_HAS_FRAME,
   META_CORE_GET_CLIENT_WIDTH,
@@ -89,123 +89,84 @@ typedef enum
  * which could theoretically be handled by this function if we relaxed the
  * requirement that all questions should have exactly one argument.
  */
-void meta_core_get (Display *xdisplay,
-                    Window window,
-                    ...);
+void meta_core_get(Display *xdisplay, Window window, ...);
 
-void meta_core_queue_frame_resize (Display *xdisplay,
-                                   Window frame_xwindow);
+void meta_core_queue_frame_resize(Display *xdisplay, Window frame_xwindow);
 
 /* Move as a result of user operation */
-void meta_core_user_move    (Display *xdisplay,
-                             Window   frame_xwindow,
-                             int      x,
-                             int      y);
-void meta_core_user_resize  (Display *xdisplay,
-                             Window   frame_xwindow,
-                             int      gravity,
-                             int      width,
-                             int      height);
+void meta_core_user_move(Display *xdisplay, Window frame_xwindow, int x, int y);
+void meta_core_user_resize(Display *xdisplay, Window frame_xwindow, int gravity,
+                           int width, int height);
 
-void meta_core_user_raise   (Display *xdisplay,
-                             Window   frame_xwindow);
-void meta_core_user_lower_and_unfocus (Display *xdisplay,
-                                       Window   frame_xwindow,
-                                       guint32  timestamp);
+void meta_core_user_raise(Display *xdisplay, Window frame_xwindow);
+void meta_core_user_lower_and_unfocus(Display *xdisplay, Window frame_xwindow,
+                                      guint32 timestamp);
 
-void meta_core_user_focus   (Display *xdisplay,
-                             Window   frame_xwindow,
-                             guint32  timestamp);
+void meta_core_user_focus(Display *xdisplay, Window frame_xwindow,
+                          guint32 timestamp);
 
-void meta_core_lower_beneath_focus_window (Display *xdisplay,
-                                           Window   xwindow,
-                                           guint32  timestamp);
+void meta_core_lower_beneath_focus_window(Display *xdisplay, Window xwindow,
+                                          guint32 timestamp);
 
-void meta_core_minimize         (Display *xdisplay,
-                                 Window   frame_xwindow);
-void meta_core_toggle_maximize  (Display *xdisplay,
-                                 Window   frame_xwindow);
-void meta_core_toggle_maximize_horizontally  (Display *xdisplay,
-                                              Window   frame_xwindow);
-void meta_core_toggle_maximize_vertically    (Display *xdisplay,
-                                              Window   frame_xwindow);
-void meta_core_unmaximize       (Display *xdisplay,
-                                 Window   frame_xwindow);
-void meta_core_maximize         (Display *xdisplay,
-                                 Window   frame_xwindow);
-void meta_core_delete           (Display *xdisplay,
-                                 Window   frame_xwindow,
-                                 guint32  timestamp);
-void meta_core_unshade          (Display *xdisplay,
-                                 Window   frame_xwindow,
-                                 guint32  timestamp);
-void meta_core_shade            (Display *xdisplay,
-                                 Window   frame_xwindow,
-                                 guint32  timestamp);
-void meta_core_unstick          (Display *xdisplay,
-                                 Window   frame_xwindow);
-void meta_core_stick            (Display *xdisplay,
-                                 Window   frame_xwindow);
-void meta_core_unmake_above     (Display *xdisplay,
-                                 Window   frame_xwindow);
-void meta_core_make_above       (Display *xdisplay,
-                                 Window   frame_xwindow);
-void meta_core_change_workspace (Display *xdisplay,
-                                 Window   frame_xwindow,
-                                 int      new_workspace);
+void meta_core_minimize(Display *xdisplay, Window frame_xwindow);
+void meta_core_toggle_maximize(Display *xdisplay, Window frame_xwindow);
+void meta_core_toggle_maximize_horizontally(Display *xdisplay,
+                                            Window frame_xwindow);
+void meta_core_toggle_maximize_vertically(Display *xdisplay,
+                                          Window frame_xwindow);
+void meta_core_unmaximize(Display *xdisplay, Window frame_xwindow);
+void meta_core_maximize(Display *xdisplay, Window frame_xwindow);
+void meta_core_delete(Display *xdisplay, Window frame_xwindow,
+                      guint32 timestamp);
+void meta_core_unshade(Display *xdisplay, Window frame_xwindow,
+                       guint32 timestamp);
+void meta_core_shade(Display *xdisplay, Window frame_xwindow,
+                     guint32 timestamp);
+void meta_core_unstick(Display *xdisplay, Window frame_xwindow);
+void meta_core_stick(Display *xdisplay, Window frame_xwindow);
+void meta_core_unmake_above(Display *xdisplay, Window frame_xwindow);
+void meta_core_make_above(Display *xdisplay, Window frame_xwindow);
+void meta_core_change_workspace(Display *xdisplay, Window frame_xwindow,
+                                int new_workspace);
 
-int meta_core_get_num_workspaces (Screen  *xscreen);
-int meta_core_get_active_workspace (Screen *xscreen);
-int meta_core_get_frame_workspace (Display *xdisplay,
-                                   Window frame_xwindow);
-const char* meta_core_get_workspace_name_with_index (Display *xdisplay,
-                                                     Window xroot,
-                                                     int    index);
+int meta_core_get_num_workspaces(Screen *xscreen);
+int meta_core_get_active_workspace(Screen *xscreen);
+int meta_core_get_frame_workspace(Display *xdisplay, Window frame_xwindow);
+const char *meta_core_get_workspace_name_with_index(Display *xdisplay,
+                                                    Window xroot, int index);
 
-void meta_core_show_window_menu (Display *xdisplay,
-                                 Window   frame_xwindow,
-                                 int      root_x,
-                                 int      root_y,
-                                 int      button,
-                                 guint32  timestamp);
+void meta_core_show_window_menu(Display *xdisplay, Window frame_xwindow,
+                                int root_x, int root_y, int button,
+                                guint32 timestamp);
 
-void meta_core_get_menu_accelerator (MetaMenuOp           menu_op,
-                                     int                  workspace,
-                                     unsigned int        *keysym,
-                                     MetaVirtualModifier *modifiers);
+void meta_core_get_menu_accelerator(MetaMenuOp menu_op, int workspace,
+                                    unsigned int *keysym,
+                                    MetaVirtualModifier *modifiers);
 
-gboolean   meta_core_begin_grab_op (Display    *xdisplay,
-                                    Window      frame_xwindow,
-                                    MetaGrabOp  op,
-                                    gboolean    pointer_already_grabbed,
-                                    gboolean    frame_action,
-                                    int         button,
-                                    gulong      modmask,
-                                    guint32     timestamp,
-                                    int         root_x,
-                                    int         root_y);
-void       meta_core_end_grab_op   (Display    *xdisplay,
-                                    guint32     timestamp);
-MetaGrabOp meta_core_get_grab_op     (Display    *xdisplay);
-Window     meta_core_get_grab_frame  (Display   *xdisplay);
-int        meta_core_get_grab_button (Display  *xdisplay);
+gboolean meta_core_begin_grab_op(Display *xdisplay, Window frame_xwindow,
+                                 MetaGrabOp op,
+                                 gboolean pointer_already_grabbed,
+                                 gboolean frame_action, int button,
+                                 gulong modmask, guint32 timestamp, int root_x,
+                                 int root_y);
+void meta_core_end_grab_op(Display *xdisplay, guint32 timestamp);
+MetaGrabOp meta_core_get_grab_op(Display *xdisplay);
+Window meta_core_get_grab_frame(Display *xdisplay);
+int meta_core_get_grab_button(Display *xdisplay);
 
-void       meta_core_grab_buttons  (Display *xdisplay,
-                                    Window   frame_xwindow);
+void meta_core_grab_buttons(Display *xdisplay, Window frame_xwindow);
 
-void       meta_core_set_screen_cursor (Display *xdisplay,
-                                        Window   frame_on_screen,
-                                        MetaCursor cursor);
+void meta_core_set_screen_cursor(Display *xdisplay, Window frame_on_screen,
+                                 MetaCursor cursor);
 
 /* Used because we ignore EnterNotify when a window is unmapped that
  * really shouldn't cause focus changes, by comparing the event serial
  * of the EnterNotify and the UnmapNotify.
  */
-void meta_core_increment_event_serial (Display *display);
+void meta_core_increment_event_serial(Display *display);
 
-void meta_invalidate_default_icons (void);
+void meta_invalidate_default_icons(void);
 
-void meta_invalidate_all_icons (void);
+void meta_invalidate_all_icons(void);
 
 #endif
-

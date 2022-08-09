@@ -26,7 +26,6 @@
 #ifndef META_THEME_PARSER_H
 #define META_THEME_PARSER_H
 
-MetaTheme* meta_theme_load (const char *theme_name,
-                            GError    **err);
+MetaTheme *meta_theme_load(const char *theme_name, GError **err);
 
 #endif

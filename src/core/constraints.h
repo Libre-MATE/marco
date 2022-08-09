@@ -25,24 +25,20 @@
 #ifndef META_CONSTRAINTS_H
 #define META_CONSTRAINTS_H
 
+#include "frame-private.h"
 #include "util.h"
 #include "window-private.h"
-#include "frame-private.h"
 
-typedef enum
-{
+typedef enum {
   META_IS_CONFIGURE_REQUEST = 1 << 0,
-  META_DO_GRAVITY_ADJUST    = 1 << 1,
-  META_IS_USER_ACTION       = 1 << 2,
-  META_IS_MOVE_ACTION       = 1 << 3,
-  META_IS_RESIZE_ACTION     = 1 << 4
+  META_DO_GRAVITY_ADJUST = 1 << 1,
+  META_IS_USER_ACTION = 1 << 2,
+  META_IS_MOVE_ACTION = 1 << 3,
+  META_IS_RESIZE_ACTION = 1 << 4
 } MetaMoveResizeFlags;
 
-void meta_window_constrain (MetaWindow          *window,
-                            MetaFrameBorders    *orig_borders,
-                            MetaMoveResizeFlags  flags,
-                            int                  resize_gravity,
-                            const MetaRectangle *orig,
-                            MetaRectangle       *new);
+void meta_window_constrain(MetaWindow *window, MetaFrameBorders *orig_borders,
+                           MetaMoveResizeFlags flags, int resize_gravity,
+                           const MetaRectangle *orig, MetaRectangle *new);
 
 #endif /* META_CONSTRAINTS_H */

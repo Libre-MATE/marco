@@ -24,13 +24,13 @@
 #ifndef META_FRAMES_H
 #define META_FRAMES_H
 
-#include <gtk/gtk.h>
 #include <gdk/gdkx.h>
+#include <gtk/gtk.h>
+
 #include "common.h"
 #include "theme.h"
 
-typedef enum
-{
+typedef enum {
   META_FRAME_CONTROL_NONE,
   META_FRAME_CONTROL_TITLE,
   META_FRAME_CONTROL_DELETE,
@@ -60,20 +60,24 @@ typedef enum
  * as subwindows.
  */
 
-#define META_TYPE_FRAMES            (meta_frames_get_type ())
-#define META_FRAMES(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), META_TYPE_FRAMES, MetaFrames))
-#define META_FRAMES_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), META_TYPE_FRAMES, MetaFramesClass))
-#define META_IS_FRAMES(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), META_TYPE_FRAMES))
-#define META_IS_FRAMES_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), META_TYPE_FRAMES))
-#define META_FRAMES_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), META_TYPE_FRAMES, MetaFramesClass))
+#define META_TYPE_FRAMES (meta_frames_get_type())
+#define META_FRAMES(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST((obj), META_TYPE_FRAMES, MetaFrames))
+#define META_FRAMES_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST((klass), META_TYPE_FRAMES, MetaFramesClass))
+#define META_IS_FRAMES(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE((obj), META_TYPE_FRAMES))
+#define META_IS_FRAMES_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE((klass), META_TYPE_FRAMES))
+#define META_FRAMES_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS((obj), META_TYPE_FRAMES, MetaFramesClass))
 
-typedef struct _MetaFrames        MetaFrames;
-typedef struct _MetaFramesClass   MetaFramesClass;
+typedef struct _MetaFrames MetaFrames;
+typedef struct _MetaFramesClass MetaFramesClass;
 
-typedef struct _MetaUIFrame         MetaUIFrame;
+typedef struct _MetaUIFrame MetaUIFrame;
 
-struct _MetaUIFrame
-{
+struct _MetaUIFrame {
   Window xwindow;
   GdkWindow *window;
   GtkStyleContext *style;
@@ -88,8 +92,7 @@ struct _MetaUIFrame
   MetaFrameControl prelit_control;
 };
 
-struct _MetaFrames
-{
+struct _MetaFrames {
   GtkWindow parent_instance;
 
   GHashTable *text_heights;
@@ -108,64 +111,46 @@ struct _MetaFrames
   GHashTable *cache;
 };
 
-struct _MetaFramesClass
-{
+struct _MetaFramesClass {
   GtkWindowClass parent_class;
 };
 
-GType        meta_frames_get_type               (void) G_GNUC_CONST;
+GType meta_frames_get_type(void) G_GNUC_CONST;
 
-MetaFrames *meta_frames_new (void);
+MetaFrames *meta_frames_new(void);
 
-void meta_frames_manage_window (MetaFrames *frames,
-                                Window      xwindow,
-				GdkWindow  *window);
-void meta_frames_unmanage_window (MetaFrames *frames,
-                                  Window      xwindow);
-void meta_frames_set_title (MetaFrames *frames,
-                            Window      xwindow,
-                            const char *title);
+void meta_frames_manage_window(MetaFrames *frames, Window xwindow,
+                               GdkWindow *window);
+void meta_frames_unmanage_window(MetaFrames *frames, Window xwindow);
+void meta_frames_set_title(MetaFrames *frames, Window xwindow,
+                           const char *title);
 
-void meta_frames_update_frame_style (MetaFrames *frames,
-                                     Window      xwindow);
-void meta_frames_repaint_frame (MetaFrames *frames,
-                                Window      xwindow);
+void meta_frames_update_frame_style(MetaFrames *frames, Window xwindow);
+void meta_frames_repaint_frame(MetaFrames *frames, Window xwindow);
 
-void meta_frames_get_borders (MetaFrames       *frames,
-                              Window            xwindow,
-                              MetaFrameBorders *borders);
+void meta_frames_get_borders(MetaFrames *frames, Window xwindow,
+                             MetaFrameBorders *borders);
 
-void meta_frames_apply_shapes (MetaFrames *frames,
-                               Window      xwindow,
-                               int         new_window_width,
-                               int         new_window_height,
-                               gboolean    window_has_shape);
-cairo_region_t *meta_frames_get_frame_bounds (MetaFrames *frames,
-                                              Window      xwindow,
-                                              int         window_width,
-                                              int         window_height);
+void meta_frames_apply_shapes(MetaFrames *frames, Window xwindow,
+                              int new_window_width, int new_window_height,
+                              gboolean window_has_shape);
+cairo_region_t *meta_frames_get_frame_bounds(MetaFrames *frames, Window xwindow,
+                                             int window_width,
+                                             int window_height);
 
-void meta_frames_get_corner_radiuses (MetaFrames *frames,
-                                      Window      xwindow,
-                                      float      *top_left,
-                                      float      *top_right,
-                                      float      *bottom_left,
-                                      float      *bottom_right);
+void meta_frames_get_corner_radiuses(MetaFrames *frames, Window xwindow,
+                                     float *top_left, float *top_right,
+                                     float *bottom_left, float *bottom_right);
 
-void meta_frames_move_resize_frame (MetaFrames *frames,
-				    Window      xwindow,
-				    int         x,
-				    int         y,
-				    int         width,
-				    int         height);
-void meta_frames_queue_draw (MetaFrames *frames,
-                             Window      xwindow);
+void meta_frames_move_resize_frame(MetaFrames *frames, Window xwindow, int x,
+                                   int y, int width, int height);
+void meta_frames_queue_draw(MetaFrames *frames, Window xwindow);
 
-void meta_frames_notify_menu_hide (MetaFrames *frames);
+void meta_frames_notify_menu_hide(MetaFrames *frames);
 
-Window meta_frames_get_moving_frame (MetaFrames *frames);
+Window meta_frames_get_moving_frame(MetaFrames *frames);
 
-void meta_frames_push_delay_exposes (MetaFrames *frames);
-void meta_frames_pop_delay_exposes  (MetaFrames *frames);
+void meta_frames_push_delay_exposes(MetaFrames *frames);
+void meta_frames_pop_delay_exposes(MetaFrames *frames);
 
 #endif

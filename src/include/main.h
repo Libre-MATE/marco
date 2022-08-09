@@ -26,18 +26,14 @@
 
 #include <glib.h>
 
-typedef enum
-{
-  META_EXIT_SUCCESS,
-  META_EXIT_ERROR
-} MetaExitCode;
+typedef enum { META_EXIT_SUCCESS, META_EXIT_ERROR } MetaExitCode;
 
 /* exit immediately */
-void meta_exit (MetaExitCode code);
+void meta_exit(MetaExitCode code);
 
 /* g_main_loop_quit() then fall out of main() */
-void meta_quit (MetaExitCode code);
+void meta_quit(MetaExitCode code);
 
-void meta_restart (void);
+void meta_restart(void);
 
 #endif
