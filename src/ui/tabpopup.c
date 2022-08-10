@@ -113,8 +113,7 @@ static gboolean outline_window_draw(GtkWidget *widget, cairo_t *cr,
 }
 
 static void popup_window_screen_changed(GtkWidget *widget,
-                                        GdkScreen *old_screen G_GNUC_UNUSED,
-                                        gpointer data G_GNUC_UNUSED) {
+                                        GdkScreen *old_screen, gpointer data) {
   /* To check if the display supports alpha channels, get the visual */
   GdkScreen *screen = gtk_widget_get_screen(widget);
   GdkVisual *visual = gdk_screen_get_rgba_visual(screen);

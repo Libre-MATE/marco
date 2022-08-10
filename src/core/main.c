@@ -297,7 +297,7 @@ static int sigterm_pipe_fds[2] = {-1, -1};
 
 static void sigterm_handler(int signum) {
   if (sigterm_pipe_fds[1] >= 0) {
-    G_GNUC_UNUSED int dummy;
+    int dummy;
 
     dummy = write(sigterm_pipe_fds[1], "", 1);
     close(sigterm_pipe_fds[1]);
