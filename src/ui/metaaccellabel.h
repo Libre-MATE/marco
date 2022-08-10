@@ -34,13 +34,12 @@
 #ifndef __META_ACCEL_LABEL_H__
 #define __META_ACCEL_LABEL_H__
 
+#include <glib.h>
 #include <gtk/gtk.h>
 
 #include "common.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
+G_BEGIN_DECLS
 
 #define META_TYPE_ACCEL_LABEL (meta_accel_label_get_type())
 #define META_ACCEL_LABEL(obj) \
@@ -99,8 +98,6 @@ void meta_accel_label_set_accelerator(MetaAccelLabel *accel_label,
                                       guint accelerator_key,
                                       MetaVirtualModifier accelerator_mods);
 
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
+G_END_DECLS
 
 #endif /* __META_ACCEL_LABEL_H__ */
