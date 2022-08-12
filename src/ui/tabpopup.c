@@ -237,7 +237,7 @@ MetaTabPopup *meta_ui_tab_popup_new(const MetaTabEntry *entries,
     gtk_widget_set_app_paintable(popup->outline_window, TRUE);
     gtk_widget_realize(popup->outline_window);
 
-    g_signal_connect(G_OBJECT(popup->outline_window), "draw",
+    g_signal_connect(popup->outline_window, "draw",
                      G_CALLBACK(outline_window_draw), popup);
 
     gtk_widget_show(popup->outline_window);
@@ -260,7 +260,7 @@ MetaTabPopup *meta_ui_tab_popup_new(const MetaTabEntry *entries,
         GTK_STYLE_CLASS_OSD);
   }
 
-  g_signal_connect(G_OBJECT(popup->window), "screen-changed",
+  g_signal_connect(popup->window, "screen-changed",
                    G_CALLBACK(popup_window_screen_changed), NULL);
 
   popup_window_screen_changed(popup->window, NULL, NULL);

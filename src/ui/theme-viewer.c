@@ -818,8 +818,7 @@ int main(int argc, char **argv) {
     g_free(title);
   }
 
-  g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(gtk_main_quit),
-                   NULL);
+  g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
 
   gtk_widget_realize(window);
   style = gtk_widget_get_style_context(window);

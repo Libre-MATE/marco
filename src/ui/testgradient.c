@@ -213,8 +213,7 @@ static GtkWidget *create_gradient_window(const char *title,
 
   gtk_window_set_default_size(GTK_WINDOW(window), 175, 175);
 
-  g_signal_connect(G_OBJECT(drawing_area), "draw", G_CALLBACK(draw_callback),
-                   func);
+  g_signal_connect(drawing_area, "draw", G_CALLBACK(draw_callback), func);
 
   gtk_container_add(GTK_CONTAINER(window), drawing_area);
 

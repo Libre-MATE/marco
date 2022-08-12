@@ -217,7 +217,7 @@ static void make_dialog(GtkWidget *parent, int depth) {
                         GTK_RESPONSE_ACCEPT);
 
   /* Close dialog on user response */
-  g_signal_connect(G_OBJECT(dialog), "response", G_CALLBACK(response_cb), NULL);
+  g_signal_connect(dialog, "response", G_CALLBACK(response_cb), NULL);
 
   g_object_set_data(G_OBJECT(dialog), "depth", GINT_TO_POINTER(depth));
 
@@ -408,10 +408,10 @@ static GtkWidget *focus_label(GtkWidget *window) {
 
   label = gtk_label_new("Not focused");
 
-  g_signal_connect(G_OBJECT(window), "focus_in_event",
+  g_signal_connect(window, "focus_in_event",
                    G_CALLBACK(focus_in_event_cb), label);
 
-  g_signal_connect(G_OBJECT(window), "focus_out_event",
+  g_signal_connect(window, "focus_out_event",
                    G_CALLBACK(focus_out_event_cb), label);
 
   return label;
@@ -648,8 +648,7 @@ static void clicked_toolbar_cb(GSimpleAction *action, GVariant *parameter,
       GTK_BUTTONS_CLOSE, "Clicking the toolbar buttons doesn't do anything");
 
   /* Close dialog on user response */
-  g_signal_connect(G_OBJECT(dialog), "response", G_CALLBACK(gtk_widget_destroy),
-                   NULL);
+  g_signal_connect(dialog, "response", G_CALLBACK(gtk_widget_destroy), NULL);
 
   gtk_widget_show(dialog);
 }
@@ -861,7 +860,7 @@ static void do_appwindow(GSimpleAction *action, GVariant *parameter,
   window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
   gtk_window_set_title(GTK_WINDOW(window), "Application Window");
 
-  g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(destroy_cb), NULL);
+  g_signal_connect(window, "destroy", G_CALLBACK(destroy_cb), NULL);
 
   grid = gtk_grid_new();
 
