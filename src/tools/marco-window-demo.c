@@ -91,7 +91,7 @@ static void set_gtk_window_struts(GtkWidget *window, int left, int right,
   g_signal_handlers_disconnect_by_func(G_OBJECT(window), on_realize_set_struts,
                                        NULL);
 
-  g_signal_connect_after(G_OBJECT(window), "realize",
+  g_signal_connect_after(window, "realize",
                          G_CALLBACK(on_realize_set_struts), NULL);
 
   if (gtk_widget_get_realized(widget))
@@ -132,7 +132,7 @@ static void set_gtk_window_type(GtkWindow *window, const char *type) {
   g_signal_handlers_disconnect_by_func(G_OBJECT(window), on_realize_set_type,
                                        NULL);
 
-  g_signal_connect_after(G_OBJECT(window), "realize",
+  g_signal_connect_after(window, "realize",
                          G_CALLBACK(on_realize_set_type), NULL);
 
   if (gtk_widget_get_realized(widget))
@@ -161,7 +161,7 @@ static void set_gtk_window_border_only(GtkWindow *window) {
   g_signal_handlers_disconnect_by_func(G_OBJECT(window),
                                        on_realize_set_border_only, NULL);
 
-  g_signal_connect_after(G_OBJECT(window), "realize",
+  g_signal_connect_after(window, "realize",
                          G_CALLBACK(on_realize_set_border_only), NULL);
 
   if (gtk_widget_get_realized(widget))
