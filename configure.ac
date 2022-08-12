@@ -1,4 +1,4 @@
-AC_PREREQ(2.58)
+AC_PREREQ(2.60)
 
 m4_define([marco_major_version], [1])
 m4_define([marco_minor_version], [26])
@@ -41,7 +41,7 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE",[Name of default gettext d
 AM_GNU_GETTEXT_VERSION([0.19.8])
 AM_GNU_GETTEXT([external])
 AC_PROG_CC
-AM_PROG_LIBTOOL
+LT_INIT
 
 #### Integer sizes
 
