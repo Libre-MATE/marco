@@ -1,5 +1,3 @@
-AC_PREREQ(2.60)
-
 m4_define([marco_major_version], [1])
 m4_define([marco_minor_version], [26])
 m4_define([marco_micro_version], [0])
@@ -9,6 +7,7 @@ m4_define([marco_version],
 AC_INIT([marco],
         [marco_version],
         [https://github.com/Libre-MATE/marco])
+AC_PREREQ(2.60)
 
 AC_CONFIG_SRCDIR(src/core/display.c)
 AC_CONFIG_HEADERS(config.h)
