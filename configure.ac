@@ -8,6 +8,7 @@ AC_INIT([marco],
         [marco_version],
         [https://github.com/Libre-MATE/marco])
 AC_PREREQ(2.60)
+AC_COPYRIGHT([Copyright (C) 2022 Libre MATE])
 
 AC_CONFIG_SRCDIR(src/core/display.c)
 AC_CONFIG_HEADERS(config.h)
