@@ -10,25 +10,6 @@ You need GTK+ 3.22.  For startup notification to work you need
 libstartup-notification at
 http://www.freedesktop.org/software/startup-notification/.
 
-REPORTING BUGS AND SUBMITTING PATCHES
-===
-
-Report new bugs on https://github.com/mate-desktop/marco.
-Please check for duplicates, *especially* if you are reporting a feature
-request.
-
-Please do *not* add "me too!" or "yes I really want this!" comments to
-feature requests on GitHub. Please read
-http://pobox.com/~hp/features.html prior to adding any kind of flame
-about missing features or misfeatures.
-
-Feel free to send patches too; Marco is relatively small and
-simple, so if you find a bug or want to add a feature it should be
-pretty easy.  Send me mail, or file a pull request at
-https://github.com/mate-desktop/marco/pulls
-
-See the HACKING file for some notes on hacking Marco.
-
 SHRINKING MARCO
 ===
 
@@ -229,11 +210,6 @@ WM accessories.
 You might be interested in existing accessories such as "Devil's Pie"
 by Ross Burton, which add features to Marco (or other
 EWMH-compliant WMs).
-
-MARCO BUGS, NON-FEATURES, AND CAVEATS
-===
-
-See github: https://github.com/mate-desktop/marco/issues
 
 FAQ
 ===
