@@ -29,7 +29,8 @@ AC_COPYRIGHT([Copyright (C) 2022 Libre MATE])
 AC_CONFIG_SRCDIR(src/core/display.c)
 AC_CONFIG_HEADERS(config.h)
 AC_CONFIG_MACRO_DIR([m4])
-AM_INIT_AUTOMAKE([1.11 subdir-objects no-dist-gzip dist-xz silent-rules check-news])
+AM_INIT_AUTOMAKE([1.11 subdir-objects no-dist-gzip dist-xz check-news])
+AM_SILENT_RULES([yes])
 AM_MAINTAINER_MODE
 
 MATE_DEBUG_CHECK([no])
