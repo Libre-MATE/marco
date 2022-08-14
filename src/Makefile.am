@@ -195,8 +195,6 @@ EXTRA_DIST= \
 	$(desktopfiles_in_files) \
 	$(wmproperties_in_files) \
 	$(xml_in_files) \
-	libmarco-private.pc.in \
-	meson.build
-
+	libmarco-private.pc.in
 
 -include $(top_srcdir)/git.mk

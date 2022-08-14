@@ -6,11 +6,7 @@ ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 EXTRA_DIST = \
 	its \
 	autogen.sh \
-	HACKING \
-	meson.build \
-	meson_options.txt \
-	meson_post_install.py \
-	po/meson.build
+	HACKING
 
 DISTCHECK_CONFIGURE_FLAGS =  \
 	--enable-compile-warnings=no \

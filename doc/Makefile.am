@@ -5,7 +5,6 @@ EXTRA_DIST= \
 	marco-theme.dtd \
 	dialogs.txt \
 	code-overview.txt \
-	how-to-get-focus-right.txt \
-	meson.build
+	how-to-get-focus-right.txt
 
 -include $(top_srcdir)/git.mk
