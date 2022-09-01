@@ -55,7 +55,9 @@
 #include <glib-object.h>
 #include <glib/gi18n-lib.h>
 #include <glib/gprintf.h>
+#ifdef ENABLE_NLS
 #include <locale.h>
+#endif /* ENABLE_NLS */
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -332,10 +334,12 @@ int main(int argc, char **argv) {
   guint i;
   GIOChannel *channel;
 
+#ifdef ENABLE_NLS
   if (setlocale(LC_ALL, "") == NULL)
     meta_warning(
         "Locale not understood by C library, internationalization will not "
         "work\n");
+#endif /* ENABLE_NLS */
 
   sigemptyset(&empty_mask);
   act.sa_handler = SIG_IGN;
@@ -371,9 +375,11 @@ int main(int argc, char **argv) {
 
   meta_print_self_identity();
 
+#ifdef ENABLE_NLS
   bindtextdomain(GETTEXT_PACKAGE, MARCO_LOCALEDIR);
   bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
   textdomain(GETTEXT_PACKAGE);
+#endif /* ENABLE_NLS */
 
   /* Parse command line arguments.*/
   meta_parse_options(&argc, &argv, &meta_args);

@@ -26,6 +26,10 @@
 #endif
 
 #include <glib/gi18n.h>
+#ifdef ENABLE_NLS
+#include <locale.h>
+#endif /* ENABLE_NLS */
+
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include <string.h>
@@ -767,9 +771,12 @@ int main(int argc, char **argv) {
   GtkWidget *notebook;
   int i;
 
+#ifdef ENABLE_NLS
+  setlocale(LC_ALL, "");
   bindtextdomain(GETTEXT_PACKAGE, MARCO_LOCALEDIR);
   textdomain(GETTEXT_PACKAGE);
   bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
+#endif /* ENABLE_NLS */
 
   gtk_init(&argc, &argv);
 
