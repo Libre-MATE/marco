@@ -2080,14 +2080,13 @@ void meta_prefs_get_window_binding(const char *name, unsigned int *keysym,
       }
 
       /* Not found; return the disabled value */
-      *keysym = *modifiers = 0;
-      return;
+      goto out;
     }
 
     --i;
   }
-
-  g_assert_not_reached();
+out:
+  *keysym = *modifiers = 0;
 }
 
 gboolean meta_prefs_get_compositing_manager(void) {
